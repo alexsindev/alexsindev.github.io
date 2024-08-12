@@ -1,24 +1,18 @@
-/**
-* Template Name: MyResume - v2.2.1
-* Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
 body {
   font-family: "Open Sans", sans-serif;
-  color: #272829;
+  color: #EEEEEE;
+  background-color: #31363F;
 }
 
 a {
-  color: #5dbd82;
+  color: #1b666e;
 }
 
 a:hover {
-  color: #96d3ad;
+  color: #3777b6;
   text-decoration: none;
 }
 
@@ -42,7 +36,7 @@ h6 {
   border-radius: 50px;
   right: 15px;
   bottom: 15px;
-  background: #5dbd82;
+  background: #76ABAE;
   color: #fff;
   transition: display 0.5s ease-in-out;
   z-index: 99999;
@@ -57,7 +51,7 @@ h6 {
 
 .back-to-top:hover {
   color: #fff;
-  background: #0678e3;
+  background: #698081;
   transition: background 0.2s ease-in-out;
 }
 
@@ -80,7 +74,7 @@ h6 {
   position: fixed;
   top: calc(50% - 30px);
   left: calc(50% - 30px);
-  border: 6px solid #5dbd82;
+  border: 6px solid #76ABAE;
   border-top-color: #fff;
   border-bottom-color: #fff;
   border-radius: 50%;
@@ -164,7 +158,7 @@ h6 {
 .nav-menu a {
   display: flex;
   align-items: center;
-  color: #45505b;
+  color: #31363F;
   padding: 10px 18px;
   margin-bottom: 8px;
   transition: 0.3s;
@@ -183,7 +177,7 @@ h6 {
 
 .nav-menu a span {
   padding: 0 5px 0 7px;
-  color: #45505b;
+  color: #31363F;
 }
 
 @media (min-width: 992px) {
@@ -200,7 +194,7 @@ h6 {
 .nav-menu .active > a,
 .nav-menu li:hover > a {
   color: #fff;
-  background: #5dbd82;
+  background: #76ABAE;
 }
 
 .nav-menu a:hover span,
@@ -237,7 +231,7 @@ h6 {
 }
 
 .mobile-nav-toggle i {
-  color: #45505b;
+  color: #31363F;
 }
 
 .mobile-nav-active {
@@ -249,7 +243,7 @@ h6 {
 }
 
 .mobile-nav-active .mobile-nav-toggle i {
-  color: #5dbd82;
+  color: #76ABAE;
 }
 
 /*--------------------------------------------------------------
@@ -258,7 +252,7 @@ h6 {
 #hero {
   width: 100%;
   height: 100vh;
-  background: url("../img/hero-bg.jpg") top right no-repeat;
+  /* background: url("../img/hero-bg.jpg") top right no-repeat; */
   background-size: cover;
   position: relative;
 }
@@ -271,7 +265,6 @@ h6 {
 
 #hero:before {
   content: "";
-  background: rgba(138, 83, 83, 0.3);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -295,7 +288,7 @@ h6 {
 }
 
 #hero p span {
-  color: #5dbd82;
+  color: #76ABAE;
   letter-spacing: 1px;
 }
 
@@ -313,7 +306,7 @@ h6 {
 }
 
 #hero .social-links a:hover {
-  color: #5dbd82;
+  color: #76ABAE;
 }
 
 @media (max-width: 992px) {
@@ -351,7 +344,7 @@ section {
   margin-bottom: 20px;
   padding-bottom: 20px;
   position: relative;
-  color: #45505b;
+  color: #EEEEEE;
 }
 
 .section-title h2::before {
@@ -371,7 +364,7 @@ section {
   display: block;
   width: 40px;
   height: 3px;
-  background: #5dbd82;
+  background: #76ABAE;
   bottom: 0;
   left: calc(50% - 20px);
 }
@@ -386,7 +379,7 @@ section {
 .about .content h3 {
   font-weight: 700;
   font-size: 26px;
-  color: #728394;
+  color: #EEEEEE;
 }
 
 .about .content ul {
@@ -401,7 +394,7 @@ section {
 .about .content ul i {
   font-size: 20px;
   padding-right: 2px;
-  color: #5dbd82;
+  color: #76ABAE;
 }
 
 .about .content p:last-child {
@@ -416,13 +409,13 @@ section {
   font-weight: 700;
   margin-top: 20px;
   margin-bottom: 20px;
-  color: #45505b;
+  color: #31363F;
 }
 
 .resume .resume-item {
   padding: 0 0 20px 20px;
   margin-top: -2px;
-  border-left: 2px solid #5dbd82;
+  border-left: 2px solid #76ABAE;
   position: relative;
 }
 
@@ -432,16 +425,15 @@ section {
   font-weight: 600;
   text-transform: uppercase;
   font-family: "Poppins", sans-serif;
-  color: #5dbd82;
+  color: #76ABAE;
   margin-bottom: 10px;
 }
 
 .resume .resume-item h5 {
   font-size: 16px;
-  background: #f7f8f9;
   padding: 5px 15px;
   display: inline-block;
-  font-weight: 600;
+  font-weight: 900;
   margin-bottom: 10px;
 }
 
@@ -466,7 +458,7 @@ section {
   left: -9px;
   top: 0;
   background: #fff;
-  border: 2px solid #5dbd82;
+  border: 2px solid #76ABAE;
 }
 
 /*--------------------------------------------------------------
@@ -482,12 +474,20 @@ section {
   font-weight: 600;
 }
 
+.contact-email a {
+  color: #76ABAE;
+}
+
+.contact-email a:hover {
+  color: #698081;
+}
+
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: #f7f8f9;
-  color: #45505b;
+  background: #31363F;
+  color: #EEEEEE;
   font-size: 14px;
   text-align: center;
   padding: 30px 0;
@@ -516,7 +516,7 @@ section {
 #footer .social-links a {
   font-size: 18px;
   display: inline-block;
-  background: #5dbd82;
+  background: #76ABAE;
   color: #fff;
   line-height: 1;
   padding: 8px 0;
