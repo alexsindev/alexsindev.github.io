@@ -1,10 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alex Sin | Software Engineer</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Alex Sin - Software Engineer specializing in Fullstack Development, Functional Programming, and Distributed Systems. M.Sc in Computer Science with experience at Cadmus, Viatick, and more.">
+  <meta name="keywords"
+    content="Alex Sin, Software Engineer, Fullstack Developer, Elixir, Phoenix, React, Distributed Systems, Functional Programming">
+  <meta name="author" content="Alex Sin">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://alexsindev.github.io/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://alexsindev.github.io/">
+  <meta property="og:title" content="Alex Sin | Software Engineer">
+  <meta property="og:description"
+    content="Software Engineer specializing in Fullstack Development, Functional Programming, and Distributed Systems.">
+  <meta property="og:image" content="https://alexsindev.github.io/profile_pic.jpeg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://alexsindev.github.io/">
+  <meta name="twitter:title" content="Alex Sin | Software Engineer">
+  <meta name="twitter:description"
+    content="Software Engineer specializing in Fullstack Development, Functional Programming, and Distributed Systems.">
+  <meta name="twitter:image" content="https://alexsindev.github.io/profile_pic.jpeg">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#0f1419">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Alex Sin",
+    "description": "Software Engineer specializing in real-time systems, functional programming, and distributed architectures.",
+    "url": "https://alexsindev.github.io",
+    "image": "https://alexsindev.github.io/profile_pic.jpeg",
+    "jobTitle": "Software Engineer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Cadmus",
+      "url": "https://cadmus.io"
+    },
+    "alumniOf": [
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "Asian Institute of Technology"
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "University of Greenwich"
+      }
+    ],
+    "sameAs": [
+      "https://github.com/alexsindev",
+      "https://linkedin.com/in/alexsindev"
+    ],
+    "knowsAbout": ["Elixir", "Phoenix", "React", "Distributed Systems", "Functional Programming", "Node.js", "TypeScript"]
+  }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>λ</text></svg>">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -32,6 +98,22 @@
       --glow: 0 0 10px rgba(107, 154, 120, 0.2);
     }
 
+    @media (prefers-color-scheme: light) {
+      :root {
+        --primary-bg: #fafaf9;
+        --secondary-bg: #f0efed;
+        --accent-bg: #e8e7e5;
+        --text-primary: #1a1a1a;
+        --text-secondary: #555b64;
+        --accent-color: #4a7a58;
+        --accent-hover: #3a6a48;
+        --border-color: #d1d5db;
+        --gradient: linear-gradient(135deg, #f5f5f0 0%, #fafaf9 100%);
+        --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        --glow: 0 0 10px rgba(74, 122, 88, 0.15);
+      }
+    }
+
     body {
       font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: var(--primary-bg);
@@ -41,7 +123,6 @@
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    /* Subtle background */
     body::before {
       content: '';
       position: fixed;
@@ -55,6 +136,23 @@
       z-index: -1;
     }
 
+    /* Skip link for keyboard navigation */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--accent-color);
+      color: var(--primary-bg);
+      padding: 8px 16px;
+      z-index: 100;
+      font-size: 0.9rem;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
     .container {
       max-width: 1000px;
       margin: 0 auto;
@@ -62,15 +160,11 @@
       position: relative;
     }
 
-    /* Header Section */
+    /* Hero Section */
     .hero {
       text-align: center;
       padding: 20px 0;
       position: relative;
-    }
-
-    .hero::before {
-      display: none;
     }
 
     .profile-container {
@@ -92,8 +186,9 @@
       border-color: var(--text-primary);
     }
 
-    .profile-image::before {
-      display: none;
+    .credentials {
+      font-size: 0.6em;
+      font-weight: 400;
     }
 
     h1 {
@@ -102,29 +197,26 @@
       font-weight: 500;
       color: var(--text-primary);
       letter-spacing: 0.08em;
-      text-transform: none;
-    }
-
-    .subtitle {
-      font-family: var(--heading-font);
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      font-weight: 400;
-      font-style: italic;
-      text-transform: none;
-      line-height: 1.7;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
     .tech-stack {
       font-family: var(--heading-font);
       font-size: 1rem;
       color: var(--accent-color);
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       font-weight: 400;
       letter-spacing: 0.02em;
+    }
+
+    .intro {
+      font-family: var(--heading-font);
+      font-size: 1rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto 20px;
+      font-style: italic;
     }
 
     .contact-info {
@@ -141,11 +233,6 @@
       text-decoration: underline;
       transition: all 0.2s ease;
       font-size: 0.9rem;
-      text-transform: none;
-    }
-
-    .contact-link::before {
-      display: none;
     }
 
     .contact-link:hover {
@@ -161,7 +248,6 @@
       text-align: left;
       margin: 40px 0;
       position: relative;
-      text-transform: none;
       letter-spacing: 0.03em;
       color: var(--text-primary);
     }
@@ -176,6 +262,21 @@
       background: var(--accent-color);
     }
 
+    /* Shared card styles */
+    .experience-card,
+    .education-card {
+      background: none;
+      border: 1px solid var(--border-color);
+      border-radius: 2px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .experience-card:hover,
+    .education-card:hover {
+      border-color: var(--accent-color);
+    }
+
     /* Experience Cards */
     .experience-grid {
       display: grid;
@@ -184,21 +285,7 @@
     }
 
     .experience-card {
-      background: none;
-      border: 1px solid var(--border-color);
-      border-radius: 2px;
       padding: 20px;
-      transition: all 0.2s ease;
-      position: relative;
-      cursor: pointer;
-    }
-
-    .experience-card::before {
-      display: none;
-    }
-
-    .experience-card:hover {
-      border-color: var(--accent-color);
     }
 
     .job-header {
@@ -210,19 +297,18 @@
       gap: 10px;
     }
 
-    .job-title {
+    h3.job-title {
       font-family: var(--heading-font);
       font-size: 1.25rem;
       font-weight: 600;
       color: var(--text-primary);
       margin-bottom: 5px;
-      text-transform: none;
       letter-spacing: 0.01em;
     }
 
     .job-period {
       font-size: 0.8rem;
-      color: var(--accent-color);
+      color: var(--text-secondary);
       padding: 3px 10px;
       background: none;
       border: 1px solid var(--accent-color);
@@ -237,7 +323,6 @@
       margin-bottom: 15px;
       display: block;
       transition: color 0.2s ease;
-      text-transform: none;
       font-style: italic;
     }
 
@@ -283,37 +368,82 @@
     }
 
     .education-card {
-      background: none;
-      border: 1px solid var(--border-color);
-      border-radius: 2px;
       padding: 15px;
-      transition: all 0.2s ease;
-      position: relative;
     }
 
-    .education-card:hover {
-      border-color: var(--accent-color);
-    }
-
-    .education-card::before {
-      display: none;
-    }
-
-    .degree-title {
+    h3.degree-title {
       font-family: var(--heading-font);
       font-size: 1.15rem;
       font-weight: 600;
       color: var(--text-primary);
       margin-bottom: 5px;
-      text-transform: none;
       letter-spacing: 0.01em;
     }
 
     .institution {
       color: var(--text-secondary);
       font-size: 0.9rem;
-      text-transform: none;
       font-style: italic;
+    }
+
+    .edu-period {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-top: 5px;
+    }
+
+    .edu-details {
+      font-family: var(--heading-font);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    /* Certifications */
+    .cert-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .cert-card {
+      background: none;
+      border: 1px solid var(--border-color);
+      border-radius: 2px;
+      padding: 12px 15px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .cert-card:hover {
+      border-color: var(--accent-color);
+    }
+
+    .cert-title {
+      font-family: var(--heading-font);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .cert-title a {
+      color: var(--text-primary);
+      text-decoration: underline;
+      transition: color 0.2s ease;
+    }
+
+    .cert-title a:hover {
+      color: var(--accent-color);
+    }
+
+    .cert-institution {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-style: italic;
+      margin-left: 5px;
     }
 
     /* Footer */
@@ -329,13 +459,18 @@
       text-decoration: none;
       transition: color 0.2s ease;
       font-size: 0.85rem;
-      text-transform: none;
       font-family: var(--heading-font);
       font-style: italic;
     }
 
     footer a:hover {
       color: var(--text-primary);
+    }
+
+    /* Focus styles for keyboard navigation */
+    :focus-visible {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 2px;
     }
 
     /* Responsive Design */
@@ -368,36 +503,16 @@
       .education-card {
         padding: 20px;
       }
-
-      .theme-selector {
-        top: 15px;
-        right: 15px;
-      }
-
-      .theme-toggle-btn {
-        width: 45px;
-        height: 45px;
-        font-size: 1.1rem;
-      }
-
-      .theme-options {
-        min-width: 100px;
-        padding: 12px;
-      }
     }
 
     @media (max-width: 480px) {
       .profile-image {
-        width: 140px;
-        height: 140px;
+        width: 100px;
+        height: 100px;
       }
 
       h1 {
-        font-size: 2.5rem;
-      }
-
-      .subtitle {
-        font-size: 1.2rem;
+        font-size: 2rem;
       }
     }
 
@@ -414,29 +529,16 @@
       }
     }
 
-    .hero,
-    .experience-card,
-    .education-card {
+    .hero {
       animation: fadeIn 0.6s ease-out;
     }
 
-    .experience-card:nth-child(2) {
-      animation-delay: 0.1s;
-    }
-
-    .experience-card:nth-child(3) {
-      animation-delay: 0.2s;
-    }
-
-    .experience-card:nth-child(4) {
-      animation-delay: 0.3s;
-    }
-
-    .experience-card:nth-child(5) {
-      animation-delay: 0.4s;
-    }
-
     /* Scrollbar Styling */
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-color) var(--primary-bg);
+    }
+
     ::-webkit-scrollbar {
       width: 8px;
     }
@@ -457,30 +559,45 @@
 </head>
 
 <body>
-  <div class="container">
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <main class="container" id="main-content">
     <section class="hero">
       <div class="profile-container">
-        <img src="profile_pic.jpeg" alt="Alex Sin" class="profile-image">
-        <h1>Alex Sin, <span style="font-size: 0.6em; font-weight: 400;">M.Sc, B.Sc</span></h1>
+        <img src="profile_pic.jpeg" alt="Alex Sin" class="profile-image" loading="lazy" decoding="async">
+        <h1>Alex Sin, <span class="credentials">M.Sc, B.Sc</span></h1>
         <p class="tech-stack">⧉ Fullstack • λ Functional Programming • ⎔ Distributed Systems</p>
+        <p class="intro">
+          Building software systems for humanity. Currently engineering at cadmus.io,
+          Melbourne.
+        </p>
       </div>
 
+      <div class="contact-info">
+        <a href="https://github.com/alexsindev" target="_blank" rel="noopener noreferrer"
+          class="contact-link">github</a>
+        <a href="https://linkedin.com/in/alexsindev" target="_blank" rel="noopener noreferrer"
+          class="contact-link">linkedin</a>
+        <a href="mailto:alex.sin@cadmus.io" class="contact-link">alex.sin@cadmus.io</a>
+        <a href="Alex%20Sin%20-%20Resume%202026.pdf" class="contact-link" download>resume</a>
+      </div>
     </section>
 
     <h2 class="section-header">Experience</h2>
 
     <div class="experience-grid">
-      <div class="experience-card">
+      <article class="experience-card">
         <div class="job-header">
           <div>
-            <div class="job-title">Cadmus</div>
-            <a href="https://cadmus.io/" target="_blank" class="company-link">cadmus.io - Melbourne, Australia</a>
+            <h3 class="job-title">Cadmus</h3>
+            <a href="https://cadmus.io/" target="_blank" rel="noopener noreferrer" class="company-link">cadmus.io -
+              Melbourne, Australia</a>
           </div>
-          <span class="job-period">2024 - Present</span>
+          <time class="job-period" datetime="2024">2024 - Present</time>
         </div>
         <p class="job-description">
-          First-in-market online, authentic assessment platform powering the delivery of written,
-          open-book and in-place exams for every academic discipline in the higher education sector.
+          Building real-time assessment infrastructure for Australia's leading online exam platform,
+          working across Elixir/Phoenix, GraphQL, and React to serve the higher education sector.
         </p>
         <div class="tech-tags">
           <span class="tech-tag">Elixir</span>
@@ -492,20 +609,20 @@
           <span class="tech-tag">PostgreSQL</span>
           <span class="tech-tag">AWS</span>
         </div>
-      </div>
+      </article>
 
-      <div class="experience-card">
+      <article class="experience-card">
         <div class="job-header">
           <div>
-            <div class="job-title">Jarvis Platform</div>
-            <a href="https://viatick.com/" target="_blank" class="company-link">viatick.com - Singapore</a>
+            <h3 class="job-title">Jarvis Platform</h3>
+            <a href="https://viatick.com/" target="_blank" rel="noopener noreferrer" class="company-link">viatick.com -
+              Singapore</a>
           </div>
-          <span class="job-period">2023 - 2024</span>
+          <time class="job-period" datetime="2023">2023 - 2024</time>
         </div>
         <p class="job-description">
-          Microservices-based platform for various industries with cloud-based reporting and analytics, flexible
-          templates,
-          customizable views, and dependable hardware solutions.
+          Designed and deployed microservices for IoT reporting and analytics on Kubernetes,
+          managing containerized workloads across Oracle Cloud infrastructure.
         </p>
         <div class="tech-tags">
           <span class="tech-tag">Node.js</span>
@@ -518,19 +635,20 @@
           <span class="tech-tag">IoT</span>
           <span class="tech-tag">MQTT</span>
         </div>
-      </div>
+      </article>
 
-      <div class="experience-card">
+      <article class="experience-card">
         <div class="job-header">
           <div>
-            <div class="job-title">ATalk</div>
-            <a href="https://www.abank.com.mm" target="_blank" class="company-link">abank.com.mm - Yangon</a>
+            <h3 class="job-title">ATalk</h3>
+            <a href="https://www.abank.com.mm" target="_blank" rel="noopener noreferrer"
+              class="company-link">abank.com.mm - Yangon</a>
           </div>
-          <span class="job-period">2023</span>
+          <time class="job-period" datetime="2023">2023</time>
         </div>
         <p class="job-description">
-          Real-time messaging application with video and audio call capabilities. Developed for a leading private bank
-          in Myanmar.
+          Architected the real-time messaging backend with WebRTC video/audio capabilities and
+          event-driven message delivery using RabbitMQ and Socket.io for a leading private bank.
         </p>
         <div class="tech-tags">
           <span class="tech-tag">Node.js</span>
@@ -543,20 +661,20 @@
           <span class="tech-tag">Docker</span>
           <span class="tech-tag">Jitsi</span>
         </div>
-      </div>
+      </article>
 
-      <div class="experience-card">
+      <article class="experience-card">
         <div class="job-header">
           <div>
-            <div class="job-title">Passenger Information Display System (PIDS)</div>
+            <h3 class="job-title">Passenger Information Display System (PIDS)</h3>
             <a href="https://www.lta.gov.sg/content/ltagov/en/newsroom/2021/9/news-releases/New_PIDS_at_more_than_300_bus_stops.html"
-              target="_blank" class="company-link">LTA - Singapore</a>
+              target="_blank" rel="noopener noreferrer" class="company-link">LTA - Singapore</a>
           </div>
-          <span class="job-period">2021 - 2022</span>
+          <time class="job-period" datetime="2021">2021 - 2022</time>
         </div>
         <p class="job-description">
-          Passenger Information Display System for Singapore Land Transport Authority. Real-time bus information updates
-          for over 200+ bus stops in Singapore.
+          Built the real-time data pipeline powering passenger information displays across 200+ bus stops
+          for Singapore's Land Transport Authority.
         </p>
         <div class="tech-tags">
           <span class="tech-tag">Elixir</span>
@@ -569,17 +687,17 @@
           <span class="tech-tag">Python</span>
           <span class="tech-tag">TDD</span>
         </div>
-      </div>
+      </article>
     </div>
 
     <h2 class="section-header">Education</h2>
 
     <div class="education-grid">
       <div class="education-card">
-        <div class="degree-title">Master of Science in Computer Science</div>
+        <h3 class="degree-title">Master of Science in Computer Science</h3>
         <div class="institution">Asian Institute of Technology - TH</div>
-        <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 5px;">2025 - Present</div>
-        <p class="job-description" style="margin-top: 10px; margin-bottom: 0;">
+        <time class="edu-period" datetime="2025">2025 - Present</time>
+        <p class="edu-details">
           <strong>CGPA:</strong> 3.55/4.0<br>
           <strong>Courses:</strong> <strong>Theory of Computation</strong>, <strong>Algorithm Design and
             Analysis</strong>, <strong>Programming Language and Compilers</strong>, <strong>Data Engineering and
@@ -590,10 +708,10 @@
       </div>
 
       <div class="education-card">
-        <div class="degree-title">Bachelor of Science (Hons) in Computing</div>
+        <h3 class="degree-title">Bachelor of Science (Hons) in Computing</h3>
         <div class="institution">University of Greenwich - UK</div>
-        <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 5px;">2022 - 2023</div>
-        <p class="job-description" style="margin-top: 10px; margin-bottom: 0;">
+        <time class="edu-period" datetime="2022">2022 - 2023</time>
+        <p class="edu-details">
           <strong>Grade:</strong> First Class Honours<br>
           <strong>Courses:</strong> <strong>Human Computer Interaction and Design</strong>, <strong>Requirement
             Management</strong>, <strong>Enterprise Web Software Development</strong>, <strong>Mobile Design and
@@ -602,10 +720,10 @@
       </div>
 
       <div class="education-card">
-        <div class="degree-title">Advanced Diploma in Computing</div>
+        <h3 class="degree-title">Advanced Diploma in Computing</h3>
         <div class="institution">Scottish Qualifications Authority - UK</div>
-        <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 5px;">2020 - 2022</div>
-        <p class="job-description" style="margin-top: 10px; margin-bottom: 0;">
+        <time class="edu-period" datetime="2020">2020 - 2022</time>
+        <p class="edu-details">
           <strong>Grade:</strong> SCQF Level 8<br>
           <strong>Courses:</strong> <strong>Computer Systems Fundamentals</strong>, <strong>Client Operating
             Systems</strong>, <strong>Convergence Technologies</strong>, <strong>Digital Forensics</strong>,
@@ -618,96 +736,32 @@
 
     <h2 class="section-header">Licenses & Certifications</h2>
 
-    <div class="education-grid" style="gap: 10px;">
-      <div class="education-card" style="padding: 12px 15px;">
-        <span class="degree-title" style="font-size: 1rem;">IELTS - Band 8.0</span>
-        <span class="institution" style="margin-left: 10px;">British Council • Mar 2025</span>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <span class="cert-title">IELTS - Band 8.0</span>
+        <span class="cert-institution">British Council &bull; <time datetime="2025-03">Mar 2025</time></span>
       </div>
 
-      <div class="education-card" style="padding: 12px 15px;">
-        <a href="https://www.credly.com/badges/5a194053-8f44-4ee3-b4d7-cd4c977ef2a6/public_url" target="_blank"
-          class="degree-title" style="font-size: 1rem; text-decoration: underline; color: var(--text-primary);">AWS
-          Certified Developer - Associate</a>
-        <span class="institution" style="margin-left: 10px;">Amazon Web Services • Nov 2022</span>
+      <div class="cert-card">
+        <span class="cert-title"><a href="https://www.credly.com/badges/5a194053-8f44-4ee3-b4d7-cd4c977ef2a6/public_url"
+            target="_blank" rel="noopener noreferrer">AWS Certified Developer - Associate</a></span>
+        <span class="cert-institution">Amazon Web Services &bull; <time datetime="2022-11">Nov 2022</time></span>
       </div>
     </div>
-  </div>
+  </main>
 
   <footer>
-    <div class="contact-info" style="margin-bottom: 15px;">
-      <a href="https://github.com/alexsindev" target="_blank" class="contact-link">github</a>
-      <a href="https://linkedin.com/in/alexsindev" target="_blank" class="contact-link">linkedin</a>
+    <nav aria-label="Social links" class="contact-info" style="margin-bottom: 15px;">
+      <a href="https://github.com/alexsindev" target="_blank" rel="noopener noreferrer" class="contact-link">github</a>
+      <a href="https://linkedin.com/in/alexsindev" target="_blank" rel="noopener noreferrer"
+        class="contact-link">linkedin</a>
       <a href="mailto:alex.sin@cadmus.io" class="contact-link">alex.sin@cadmus.io</a>
-    </div>
+    </nav>
     <a href="https://alexsindev.github.io">alexsindev.github.io - 2026</a>
   </footer>
 
   <script>
-    // Theme management
-    const themeToggle = document.getElementById('themeToggle');
-    const themeOptions = document.getElementById('themeOptions');
-    const themeOptionButtons = document.querySelectorAll('.theme-option');
-
-    let currentTheme = localStorage.getItem('portfolio-theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', currentTheme);
-
-    // Update active theme option
-    themeOptionButtons.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.theme === currentTheme);
-    });
-
-    // Toggle theme options visibility
-    themeToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      themeOptions.classList.toggle('active');
-    });
-
-    // Close theme options when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!themeToggle.contains(e.target) && !themeOptions.contains(e.target)) {
-        themeOptions.classList.remove('active');
-      }
-    });
-
-    // Handle theme selection
-    themeOptionButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const selectedTheme = button.dataset.theme;
-
-        // Update theme
-        document.documentElement.setAttribute('data-theme', selectedTheme);
-        localStorage.setItem('portfolio-theme', selectedTheme);
-        currentTheme = selectedTheme;
-
-        // Update active state
-        themeOptionButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-
-        // Close options
-        themeOptions.classList.remove('active');
-
-        // Add a nice transition effect
-        document.body.style.opacity = '0.95';
-        setTimeout(() => {
-          document.body.style.opacity = '1';
-        }, 150);
-      });
-    });
-
-    // Add smooth scrolling for better UX
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-
-    // Add loading animations on scroll
+    // Scroll-triggered fade-in for cards
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -722,47 +776,48 @@
       });
     }, observerOptions);
 
-    document.querySelectorAll('.experience-card, .education-card').forEach(card => {
+    document.querySelectorAll('.experience-card, .education-card, .cert-card').forEach(card => {
       card.style.opacity = '0';
       card.style.transform = 'translateY(30px)';
       card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
       observer.observe(card);
     });
 
-    // Subtle cursor glow effect
-    const cursor = document.createElement('div');
-    cursor.style.cssText = `
-      position: fixed;
-      width: 12px;
-      height: 12px;
-      background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      mix-blend-mode: screen;
-      transition: transform 0.1s ease;
-      opacity: 0.4;
-    `;
-    document.body.appendChild(cursor);
+    // Subtle cursor glow effect (desktop/fine pointer only)
+    if (window.matchMedia('(pointer: fine)').matches) {
+      const cursor = document.createElement('div');
+      cursor.setAttribute('aria-hidden', 'true');
+      cursor.style.cssText = `
+        position: fixed;
+        width: 12px;
+        height: 12px;
+        background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0.4;
+        will-change: transform;
+        top: 0;
+        left: 0;
+      `;
+      document.body.appendChild(cursor);
 
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
+      let mouseX = 0, mouseY = 0;
+      let cursorX = 0, cursorY = 0;
 
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
 
-    function updateCursor() {
-      cursorX += (mouseX - cursorX) * 0.15;
-      cursorY += (mouseY - cursorY) * 0.15;
-
-      cursor.style.left = (cursorX - 6) + 'px';
-      cursor.style.top = (cursorY - 6) + 'px';
-
-      requestAnimationFrame(updateCursor);
+      function updateCursor() {
+        cursorX += (mouseX - cursorX) * 0.15;
+        cursorY += (mouseY - cursorY) * 0.15;
+        cursor.style.transform = `translate3d(${cursorX - 6}px, ${cursorY - 6}px, 0)`;
+        requestAnimationFrame(updateCursor);
+      }
+      updateCursor();
     }
-    updateCursor();
   </script>
 </body>
 
