@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Backpressure in Event-Driven Systems — Alex Sin</title>
+  <meta name="description" content="Bursty device telemetry will overwhelm a naive ingestion pipeline. A practical look at backpressure strategies across RabbitMQ, Kafka, and Elixir GenStage.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>λ</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary-bg: #0f1419; --secondary-bg: #161d24; --text-primary: #e8e6e3;
+      --text-secondary: #9ca3af; --accent-color: #6b9a78; --border-color: #2d3741;
+      --heading-font: 'Cormorant Garamond', Georgia, serif;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --primary-bg: #fafaf9; --secondary-bg: #f0efed; --text-primary: #1a1a1a;
+        --text-secondary: #555b64; --accent-color: #4a7a58; --border-color: #d1d5db;
+      }
+    }
+    body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--primary-bg); color: var(--text-primary); line-height: 1.6; }
+    .container { max-width: 720px; margin: 0 auto; padding: 60px 20px; }
+    .back-link { font-family: var(--heading-font); font-size: 0.9rem; color: var(--text-secondary); text-decoration: none; display: inline-block; margin-bottom: 40px; transition: color 0.2s ease; }
+    .back-link:hover { color: var(--text-primary); }
+    .note-meta { font-size: 0.75rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+    h1 { font-family: var(--heading-font); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 600; color: var(--text-primary); letter-spacing: 0.03em; line-height: 1.2; margin-bottom: 8px; }
+    .status-bar { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); margin: 28px 0; }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-color); }
+    .status-text { font-size: 0.78rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em; }
+    .note-body p { font-family: var(--heading-font); font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px; }
+    .note-body h2 { font-family: var(--heading-font); font-size: 1.3rem; font-weight: 600; color: var(--text-primary); margin: 32px 0 12px; letter-spacing: 0.02em; }
+    .note-body code { font-family: monospace; font-size: 0.9em; background: var(--secondary-bg); padding: 2px 6px; border-radius: 2px; color: var(--accent-color); }
+    pre { background: var(--secondary-bg); border: 1px solid var(--border-color); padding: 16px; overflow-x: auto; margin: 20px 0; }
+    pre code { background: none; padding: 0; font-size: 0.85rem; color: var(--text-secondary); }
+    .wip-notice { border: 1px solid var(--border-color); padding: 16px 20px; margin-top: 40px; }
+    .wip-notice p { font-family: var(--heading-font); font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+    :focus-visible { outline: 2px solid var(--accent-color); outline-offset: 2px; }
+    @media (max-width: 600px) { .container { padding: 30px 16px; } }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <a href="../index.html" class="back-link">← alexsindev.github.io</a>
+
+    <p class="note-meta">Engineering Notes</p>
+    <h1>Backpressure in Event-Driven Systems</h1>
+
+    <div class="status-bar">
+      <div class="status-dot"></div>
+      <span class="status-text">In progress — March 2026</span>
+    </div>
+
+    <div class="note-body">
+      <p>
+        Backpressure is what happens when a consumer cannot keep up with a producer.
+        Without it, the producer keeps producing, the queue grows unbounded, memory
+        fills, and the system falls over. With it, the producer slows down or the excess
+        is handled in a defined way. Every event-driven system needs a backpressure story.
+        Most systems discover they do not have one in production.
+      </p>
+
+      <h2>RabbitMQ: consumer prefetch</h2>
+      <p>
+        RabbitMQ's backpressure mechanism is <code>basic.qos</code> prefetch — you tell the
+        broker how many unacknowledged messages a consumer may hold at once. If the consumer
+        is processing slowly, the broker stops delivering new messages until acknowledgements
+        arrive. The queue absorbs the burst; the consumer works at its own pace.
+      </p>
+      <p>
+        Setting prefetch too high removes the backpressure (the consumer is overwhelmed before
+        it can ack). Setting it too low reduces throughput (the consumer idles waiting for
+        delivery). The right value depends on message processing time and the number of consumer
+        threads. In practice: start at 10–50 and measure queue depth under load.
+      </p>
+
+      <h2>Kafka: consumer group lag</h2>
+      <p>
+        Kafka does not push to consumers — consumers pull. A consumer reads at its own pace
+        and commits offsets when ready. If processing is slow, the consumer falls behind; the
+        topic partition accumulates lag. Kafka retains messages regardless, so no data is lost —
+        the consumer catches up when capacity allows.
+      </p>
+      <p>
+        Consumer lag is the primary operational metric for Kafka pipelines. A rising lag
+        number means the consumer cannot keep up. The response is to add consumer instances
+        (up to the partition count) or to optimise the processing path. Kafka's backpressure
+        is pull-based and observable; the trade-off is that lag accumulation can mean consumers
+        are processing stale events.
+      </p>
+
+      <h2>Elixir GenStage: demand-driven pipelines</h2>
+      <p>
+        GenStage implements backpressure as a first-class protocol. Consumers declare demand —
+        how many events they want — and producers only emit up to that demand. The demand signal
+        flows upstream through the pipeline. A slow consumer reduces demand; the upstream
+        producer slows or buffers accordingly.
+      </p>
+
+      <pre><code>defmodule MyConsumer do
+  use GenStage
+
+  def init(_) do
+    # Subscribe to producer, request max 10 events at a time
+    {:consumer, :ok, subscribe_to: [{MyProducer, max_demand: 10}]}
+  end
+
+  def handle_events(events, _from, state) do
+    Enum.each(events, &process/1)
+    # Demand is automatically replenished after handle_events returns
+    {:noreply, [], state}
+  end
+end</code></pre>
+
+      <p>
+        GenStage is the right choice when the processing pipeline is entirely within an
+        Elixir application and you want backpressure without an external broker. Broadway
+        (built on GenStage) adds producer integrations for RabbitMQ and Kafka, combining
+        the demand-driven model with external message sources.
+      </p>
+
+      <h2>Choosing a strategy</h2>
+      <p>
+        If you are using RabbitMQ or Kafka as your message bus, use their native mechanisms
+        first — prefetch and consumer group lag are well-understood and operationally visible.
+        Reach for GenStage when you need fine-grained backpressure within an Elixir processing
+        pipeline, particularly for CPU-bound work where you want to avoid overwhelming the
+        scheduler.
+      </p>
+    </div>
+
+    <div class="wip-notice">
+      <p>
+        Full post will include load test results, Broadway configuration examples, and
+        notes on handling dead-letter queues when consumers fall permanently behind.
+      </p>
+    </div>
+  </main>
+</body>
+</html>

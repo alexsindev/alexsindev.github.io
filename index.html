@@ -4,34 +4,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alex Sin | Software Engineer</title>
+  <title>Alex Sin | Systems Software Engineer</title>
 
   <!-- SEO Meta Tags -->
   <meta name="description"
-    content="Alex Sin - Software Engineer specializing in Fullstack Development, Functional Programming, and Distributed Systems. M.Sc in Computer Science with experience at Cadmus, Viatick, and more.">
+    content="Alex Sin - Systems Software Engineer with 5+ years in distributed systems, real-time infrastructure, IoT telemetry pipelines, and cloud-native microservices across Singapore, Southeast Asia, and Australia.">
   <meta name="keywords"
-    content="Alex Sin, Software Engineer, Fullstack Developer, Elixir, Phoenix, React, Distributed Systems, Functional Programming">
+    content="Alex Sin, Systems Engineer, Distributed Systems, Elixir, Phoenix, Real-Time Systems, IoT, RabbitMQ, WebSockets, Kafka, Node.js, Kubernetes">
   <meta name="author" content="Alex Sin">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://alexsindev.github.io/">
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://alexsindev.github.io/">
-  <meta property="og:title" content="Alex Sin | Software Engineer">
+  <meta property="og:title" content="Alex Sin | Systems Software Engineer">
   <meta property="og:description"
-    content="Software Engineer specializing in Fullstack Development, Functional Programming, and Distributed Systems.">
+    content="Systems Software Engineer specialising in distributed systems, real-time infrastructure, and IoT telemetry pipelines.">
   <meta property="og:image" content="https://alexsindev.github.io/profile_pic.jpeg">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://alexsindev.github.io/">
-  <meta name="twitter:title" content="Alex Sin | Software Engineer">
+  <meta name="twitter:title" content="Alex Sin | Systems Software Engineer">
   <meta name="twitter:description"
-    content="Software Engineer specializing in Fullstack Development, Functional Programming, and Distributed Systems.">
+    content="Systems Software Engineer specialising in distributed systems, real-time infrastructure, and IoT telemetry pipelines.">
   <meta name="twitter:image" content="https://alexsindev.github.io/profile_pic.jpeg">
 
-  <!-- Theme Color -->
   <meta name="theme-color" content="#0f1419">
 
   <!-- Structured Data -->
@@ -40,30 +39,22 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Alex Sin",
-    "description": "Software Engineer specializing in real-time systems, functional programming, and distributed architectures.",
+    "description": "Systems Software Engineer specialising in distributed systems, real-time infrastructure, and IoT telemetry pipelines.",
     "url": "https://alexsindev.github.io",
     "image": "https://alexsindev.github.io/profile_pic.jpeg",
-    "jobTitle": "Software Engineer",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Cadmus",
-      "url": "https://cadmus.io"
-    },
+    "jobTitle": "Systems Software Engineer",
     "alumniOf": [
-      {
-        "@type": "CollegeOrUniversity",
-        "name": "Asian Institute of Technology"
-      },
-      {
-        "@type": "CollegeOrUniversity",
-        "name": "University of Greenwich"
-      }
+      { "@type": "CollegeOrUniversity", "name": "Asian Institute of Technology" },
+      { "@type": "CollegeOrUniversity", "name": "University of Greenwich" }
     ],
     "sameAs": [
       "https://github.com/alexsindev",
       "https://linkedin.com/in/alexsindev"
     ],
-    "knowsAbout": ["Elixir", "Phoenix", "React", "Distributed Systems", "Functional Programming", "Node.js", "TypeScript"]
+    "knowsAbout": [
+      "Elixir", "Distributed Systems", "Real-Time Systems", "IoT",
+      "RabbitMQ", "Kafka", "WebSockets", "Node.js", "TypeScript", "Kubernetes"
+    ]
   }
   </script>
 
@@ -76,6 +67,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap"
     rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -95,7 +87,6 @@
       --heading-font: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
       --gradient: linear-gradient(135deg, #1a2633 0%, #0f1419 100%);
       --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-      --glow: 0 0 10px rgba(107, 154, 120, 0.2);
     }
 
     @media (prefers-color-scheme: light) {
@@ -110,7 +101,6 @@
         --border-color: #d1d5db;
         --gradient: linear-gradient(135deg, #f5f5f0 0%, #fafaf9 100%);
         --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        --glow: 0 0 10px rgba(74, 122, 88, 0.15);
       }
     }
 
@@ -136,7 +126,6 @@
       z-index: -1;
     }
 
-    /* Skip link for keyboard navigation */
     .skip-link {
       position: absolute;
       top: -40px;
@@ -160,35 +149,20 @@
       position: relative;
     }
 
-    /* Hero Section */
+    /* ─── Hero ─── */
     .hero {
       text-align: center;
-      padding: 20px 0;
+      padding: 20px 0 40px;
       position: relative;
-    }
-
-    .profile-container {
-      position: relative;
-      margin-bottom: 15px;
+      animation: fadeIn 0.6s ease-out;
     }
 
     .profile-image {
-      width: 120px;
-      height: 120px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
-      margin: 0 auto 15px;
+      margin: 0 auto 18px;
       display: block;
-      transition: all 0.2s ease;
-      position: relative;
-    }
-
-    .profile-image:hover {
-      border-color: var(--text-primary);
-    }
-
-    .credentials {
-      font-size: 0.6em;
-      font-weight: 400;
     }
 
     h1 {
@@ -197,14 +171,23 @@
       font-weight: 500;
       color: var(--text-primary);
       letter-spacing: 0.08em;
+      margin-bottom: 6px;
     }
 
-    .tech-stack {
+    .hero-role {
       font-family: var(--heading-font);
       font-size: 1rem;
       color: var(--accent-color);
-      margin-bottom: 15px;
-      font-weight: 400;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .hero-stack {
+      font-family: var(--heading-font);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
       letter-spacing: 0.02em;
     }
 
@@ -212,11 +195,10 @@
       font-family: var(--heading-font);
       font-size: 1rem;
       color: var(--text-secondary);
-      font-weight: 600;
+      font-weight: 400;
       line-height: 1.7;
-      max-width: 600px;
-      margin: 0 auto 20px;
-      font-style: italic;
+      max-width: 580px;
+      margin: 0 auto 22px;
     }
 
     .contact-info {
@@ -224,23 +206,20 @@
       justify-content: center;
       gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 30px;
     }
 
     .contact-link {
-      border-radius: 0;
       color: var(--text-secondary);
       text-decoration: underline;
-      transition: all 0.2s ease;
+      transition: color 0.2s ease;
       font-size: 0.9rem;
     }
 
     .contact-link:hover {
-      border-color: var(--accent-color);
       color: var(--text-primary);
     }
 
-    /* Section Headers */
+    /* ─── Section Headers ─── */
     .section-header {
       font-family: var(--heading-font);
       font-size: 1.8rem;
@@ -262,39 +241,32 @@
       background: var(--accent-color);
     }
 
-    /* Shared card styles */
-    .experience-card,
-    .education-card {
-      background: none;
-      border: 1px solid var(--border-color);
-      border-radius: 2px;
-      transition: all 0.2s ease;
-      position: relative;
-    }
-
-    .experience-card:hover,
-    .education-card:hover {
-      border-color: var(--accent-color);
-    }
-
-    /* Experience Cards */
+    /* ─── Experience Cards ─── */
     .experience-grid {
       display: grid;
-      gap: 20px;
+      gap: 36px;
       margin-bottom: 60px;
     }
 
     .experience-card {
-      padding: 20px;
+      display: grid;
+      grid-template-columns: 106px 1fr;
+      gap: 0 36px;
     }
 
-    .job-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 15px;
-      flex-wrap: wrap;
-      gap: 10px;
+    .job-period {
+      font-family: var(--heading-font);
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      text-align: right;
+      padding-top: 3px;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .job-content {
+      border-left: 1px solid var(--border-color);
+      padding-left: 28px;
     }
 
     h3.job-title {
@@ -302,25 +274,15 @@
       font-size: 1.25rem;
       font-weight: 600;
       color: var(--text-primary);
-      margin-bottom: 5px;
+      margin-bottom: 3px;
       letter-spacing: 0.01em;
-    }
-
-    .job-period {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      padding: 3px 10px;
-      background: none;
-      border: 1px solid var(--accent-color);
-      border-radius: 0;
-      font-weight: 500;
     }
 
     .company-link {
       color: var(--text-secondary);
       text-decoration: none;
-      font-size: 0.9rem;
-      margin-bottom: 15px;
+      font-size: 0.88rem;
+      margin-bottom: 12px;
       display: block;
       transition: color 0.2s ease;
       font-style: italic;
@@ -333,150 +295,188 @@
     .job-description {
       font-family: var(--heading-font);
       color: var(--text-secondary);
-      margin-bottom: 20px;
-      line-height: 1.6;
+      margin-bottom: 12px;
+      line-height: 1.75;
       font-size: 1rem;
     }
 
-    .tech-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 15px;
-    }
-
-    .tech-tag {
-      padding: 2px 8px;
-      background: none;
-      border: 1px solid var(--text-secondary);
-      border-radius: 2px;
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      transition: all 0.2s ease;
-    }
-
-    .tech-tag:hover {
-      border-color: var(--accent-color);
-      color: var(--accent-color);
-    }
-
-    /* Education Section */
-    .education-grid {
-      display: grid;
-      gap: 15px;
-      margin: 0 auto;
-    }
-
-    .education-card {
-      padding: 15px;
-    }
-
-    h3.degree-title {
+    .tech-inline {
       font-family: var(--heading-font);
-      font-size: 1.15rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-style: italic;
+      opacity: 0.55;
+    }
+
+    /* ─── Engineering Stack ─── */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      gap: 28px;
+      margin-bottom: 60px;
+    }
+
+    .stack-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-color);
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .stack-tags {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .stack-tag {
+      font-family: var(--heading-font);
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* ─── Engineering Notes ─── */
+    .notes-list {
+      border: 1px solid var(--border-color);
+      margin-bottom: 60px;
+    }
+
+    a.note-item {
+      display: block;
+      padding: 18px 20px;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border-color);
+      transition: background 0.15s ease;
+    }
+
+    a.note-item:last-child {
+      border-bottom: none;
+    }
+
+    a.note-item:hover {
+      background: var(--secondary-bg);
+    }
+
+    .note-title {
+      font-family: var(--heading-font);
+      font-size: 1.05rem;
       font-weight: 600;
       color: var(--text-primary);
       margin-bottom: 5px;
       letter-spacing: 0.01em;
     }
 
-    .institution {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      font-style: italic;
-    }
-
-    .edu-period {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      margin-top: 5px;
-    }
-
-    .edu-details {
+    .note-summary {
       font-family: var(--heading-font);
+      font-size: 0.95rem;
       color: var(--text-secondary);
       line-height: 1.6;
-      font-size: 1rem;
-      margin-top: 10px;
+      margin-bottom: 8px;
     }
 
-    /* Certifications */
-    .cert-grid {
+    .note-status {
+      font-size: 0.72rem;
+      color: var(--accent-color);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── Now ─── */
+    .now-list {
+      list-style: none;
+      margin-bottom: 60px;
       display: grid;
-      gap: 10px;
+      gap: 14px;
     }
 
-    .cert-card {
-      background: none;
-      border: 1px solid var(--border-color);
-      border-radius: 2px;
-      padding: 12px 15px;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
-
-    .cert-card:hover {
-      border-color: var(--accent-color);
-    }
-
-    .cert-title {
+    .now-list li {
       font-family: var(--heading-font);
+      color: var(--text-secondary);
       font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-primary);
+      line-height: 1.7;
+      padding-left: 20px;
+      position: relative;
     }
 
-    .cert-title a {
-      color: var(--text-primary);
-      text-decoration: underline;
-      transition: color 0.2s ease;
-    }
-
-    .cert-title a:hover {
+    .now-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
       color: var(--accent-color);
     }
 
-    .cert-institution {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      font-style: italic;
-      margin-left: 5px;
+    .now-updated {
+      font-size: 0.8rem;
+      color: var(--border-color);
+      margin-top: 4px;
     }
 
-    /* Footer */
+    /* ─── Contact ─── */
+    .contact-content {
+      margin-bottom: 60px;
+    }
+
+    .contact-content p {
+      font-family: var(--heading-font);
+      color: var(--text-secondary);
+      line-height: 1.8;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      max-width: 600px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .contact-links a {
+      font-family: var(--heading-font);
+      color: var(--text-secondary);
+      text-decoration: underline;
+      font-size: 1rem;
+      width: fit-content;
+      transition: color 0.2s ease;
+    }
+
+    .contact-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* ─── Footer ─── */
     footer {
       text-align: center;
-      padding: 30px 20px;
+      padding: 24px 20px;
       border-top: 1px solid var(--border-color);
-      margin-top: 60px;
     }
 
     footer a {
       color: var(--text-secondary);
       text-decoration: none;
-      transition: color 0.2s ease;
       font-size: 0.85rem;
       font-family: var(--heading-font);
       font-style: italic;
+      transition: color 0.2s ease;
     }
 
     footer a:hover {
       color: var(--text-primary);
     }
 
-    /* Focus styles for keyboard navigation */
+    /* ─── Focus ─── */
     :focus-visible {
       outline: 2px solid var(--accent-color);
       outline-offset: 2px;
     }
 
-    /* Responsive Design */
+    /* ─── Responsive ─── */
     @media (max-width: 768px) {
       .hero {
-        padding: 10px 0;
+        padding: 10px 0 30px;
       }
 
       .contact-info {
@@ -485,9 +485,20 @@
         gap: 10px;
       }
 
-      .job-header {
-        flex-direction: column;
-        align-items: flex-start;
+      .experience-card {
+        grid-template-columns: 1fr;
+        gap: 4px 0;
+      }
+
+      .job-period {
+        text-align: left;
+      }
+
+      .job-content {
+        border-left: none;
+        border-top: 1px solid var(--border-color);
+        padding-left: 0;
+        padding-top: 14px;
       }
 
       .section-header {
@@ -499,16 +510,16 @@
         padding: 20px 15px;
       }
 
-      .experience-card,
-      .education-card {
-        padding: 20px;
+      .stack-grid {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 20px;
       }
     }
 
     @media (max-width: 480px) {
       .profile-image {
-        width: 100px;
-        height: 100px;
+        width: 90px;
+        height: 90px;
       }
 
       h1 {
@@ -516,7 +527,6 @@
       }
     }
 
-    /* Subtle fade animation */
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -529,11 +539,6 @@
       }
     }
 
-    .hero {
-      animation: fadeIn 0.6s ease-out;
-    }
-
-    /* Scrollbar Styling */
     html {
       scrollbar-width: thin;
       scrollbar-color: var(--accent-color) var(--primary-bg);
@@ -562,211 +567,317 @@
   <a href="#main-content" class="skip-link">Skip to content</a>
 
   <main class="container" id="main-content">
-    <section class="hero">
-      <div class="profile-container">
-        <img src="profile_pic.jpeg" alt="Alex Sin" class="profile-image" loading="lazy" decoding="async">
-        <h1>Alex Sin, <span class="credentials">M.Sc, B.Sc</span></h1>
-        <p class="tech-stack">⧉ Fullstack • λ Functional Programming • ⎔ Distributed Systems</p>
-        <p class="intro">
-          Building software systems for humanity. Currently engineering at cadmus.io,
-          Melbourne.
-        </p>
-      </div>
 
-      <div class="contact-info">
+    <!-- ─── Hero ─── -->
+    <section class="hero" aria-label="Introduction">
+      <img src="profile_pic.jpeg" alt="Alex Sin" class="profile-image" loading="eager" decoding="async">
+      <h1>Alex Sin</h1>
+      <p class="hero-role">Systems Software Engineer</p>
+      <p class="hero-stack">Elixir · Node.js · Distributed Systems · Real-Time Infrastructure</p>
+      <p class="intro">
+        Five years designing and operating distributed systems in production —
+        real-time transport infrastructure, IoT telemetry pipelines,
+        event-driven messaging, and cloud-native microservices across
+        Singapore, Southeast Asia, and Australia.
+      </p>
+      <nav class="contact-info" aria-label="Contact links">
         <a href="https://github.com/alexsindev" target="_blank" rel="noopener noreferrer"
           class="contact-link">github</a>
         <a href="https://linkedin.com/in/alexsindev" target="_blank" rel="noopener noreferrer"
           class="contact-link">linkedin</a>
         <a href="mailto:alex.sin@cadmus.io" class="contact-link">alex.sin@cadmus.io</a>
-        <a href="Alex%20Sin%20-%20Resume%202026.pdf" class="contact-link" download>resume</a>
-      </div>
+      </nav>
     </section>
 
+    <!-- ─── Experience ─── -->
     <h2 class="section-header">Experience</h2>
 
     <div class="experience-grid">
+
       <article class="experience-card">
-        <div class="job-header">
-          <div>
-            <h3 class="job-title">Cadmus</h3>
-            <a href="https://cadmus.io/" target="_blank" rel="noopener noreferrer" class="company-link">cadmus.io -
-              Melbourne, Australia</a>
-          </div>
-          <time class="job-period" datetime="2024">2024 - Present</time>
-        </div>
-        <p class="job-description">
-          Building real-time assessment infrastructure for Australia's leading online exam platform,
-          working across Elixir/Phoenix, GraphQL, and React to serve the higher education sector.
-        </p>
-        <div class="tech-tags">
-          <span class="tech-tag">Elixir</span>
-          <span class="tech-tag">Phoenix</span>
-          <span class="tech-tag">React</span>
-          <span class="tech-tag">Apollo</span>
-          <span class="tech-tag">GraphQL</span>
-          <span class="tech-tag">Absinthe</span>
-          <span class="tech-tag">PostgreSQL</span>
-          <span class="tech-tag">AWS</span>
+        <time class="job-period" datetime="2024">2024 – Present</time>
+        <div class="job-content">
+          <h3 class="job-title">Cadmus</h3>
+          <a href="https://cadmus.io/" target="_blank" rel="noopener noreferrer" class="company-link">
+            cadmus.io — Melbourne, Australia
+          </a>
+          <p class="job-description">
+            Building assessment infrastructure for Australia's leading academic integrity platform,
+            serving 60+ universities and processing 200,000+ student submissions per semester.
+            Working across Elixir/Phoenix, Absinthe GraphQL, and React.
+          </p>
+          <p class="tech-inline">Elixir · Phoenix · Absinthe · GraphQL · React · Apollo · PostgreSQL · AWS</p>
         </div>
       </article>
 
       <article class="experience-card">
-        <div class="job-header">
-          <div>
-            <h3 class="job-title">Jarvis Platform</h3>
-            <a href="https://viatick.com/" target="_blank" rel="noopener noreferrer" class="company-link">viatick.com -
-              Singapore</a>
-          </div>
-          <time class="job-period" datetime="2023">2023 - 2024</time>
-        </div>
-        <p class="job-description">
-          Designed and deployed microservices for IoT reporting and analytics on Kubernetes,
-          managing containerized workloads across Oracle Cloud infrastructure.
-        </p>
-        <div class="tech-tags">
-          <span class="tech-tag">Node.js</span>
-          <span class="tech-tag">TypeScript</span>
-          <span class="tech-tag">React</span>
-          <span class="tech-tag">MySQL</span>
-          <span class="tech-tag">Oracle Cloud</span>
-          <span class="tech-tag">Kubernetes</span>
-          <span class="tech-tag">Docker</span>
-          <span class="tech-tag">IoT</span>
-          <span class="tech-tag">MQTT</span>
+        <time class="job-period" datetime="2023">2023 – 2024</time>
+        <div class="job-content">
+          <h3 class="job-title">Jarvis IoT Platform — Viatick</h3>
+          <a href="https://viatick.com/" target="_blank" rel="noopener noreferrer" class="company-link">
+            viatick.com — Singapore
+          </a>
+          <p class="job-description">
+            Designed and deployed a telemetry ingestion platform for 10,000+ IoT field devices
+            across Southeast Asia. Built protocol-specific microservices handling MQTT, LoRaWAN,
+            and BLE data streams, with a geolocation enrichment pipeline feeding operational
+            dashboards. Stateless ingest services ran on OCI serverless compute, scaling horizontally
+            to absorb bursty device telemetry. Kubernetes managed stateful workloads.
+          </p>
+          <p class="tech-inline">Node.js · TypeScript · MQTT · LoRaWAN · BLE · Oracle Cloud · Kubernetes · Docker ·
+            MySQL · React</p>
         </div>
       </article>
 
       <article class="experience-card">
-        <div class="job-header">
-          <div>
-            <h3 class="job-title">ATalk</h3>
-            <a href="https://www.abank.com.mm" target="_blank" rel="noopener noreferrer"
-              class="company-link">abank.com.mm - Yangon</a>
-          </div>
-          <time class="job-period" datetime="2023">2023</time>
-        </div>
-        <p class="job-description">
-          Architected the real-time messaging backend with WebRTC video/audio capabilities and
-          event-driven message delivery using RabbitMQ and Socket.io for a leading private bank.
-        </p>
-        <div class="tech-tags">
-          <span class="tech-tag">Node.js</span>
-          <span class="tech-tag">Express</span>
-          <span class="tech-tag">Redis</span>
-          <span class="tech-tag">Socket.io</span>
-          <span class="tech-tag">WebRTC</span>
-          <span class="tech-tag">RabbitMQ</span>
-          <span class="tech-tag">AWS EC2</span>
-          <span class="tech-tag">Docker</span>
-          <span class="tech-tag">Jitsi</span>
+        <time class="job-period" datetime="2023">2023</time>
+        <div class="job-content">
+          <h3 class="job-title">ATalk — ABank Myanmar</h3>
+          <a href="https://www.abank.com.mm" target="_blank" rel="noopener noreferrer" class="company-link">
+            abank.com.mm — Yangon
+          </a>
+          <p class="job-description">
+            Architected a real-time messaging backend for a leading private bank, supporting
+            5,000+ concurrent WebSocket connections. RabbitMQ provided durable message queuing
+            decoupled from the connection layer — messages survived restarts and client reconnects
+            by design. Redis managed session state across horizontally scaled Socket.io instances.
+            WebRTC signaling and Jitsi handled integrated video and audio calling on a separate path
+            from the core messaging service.
+          </p>
+          <p class="tech-inline">Node.js · Socket.io · RabbitMQ · Redis · WebRTC · Docker · AWS EC2 · Jitsi</p>
         </div>
       </article>
 
       <article class="experience-card">
-        <div class="job-header">
-          <div>
-            <h3 class="job-title">Passenger Information Display System (PIDS)</h3>
-            <a href="https://www.lta.gov.sg/content/ltagov/en/newsroom/2021/9/news-releases/New_PIDS_at_more_than_300_bus_stops.html"
-              target="_blank" rel="noopener noreferrer" class="company-link">LTA - Singapore</a>
-          </div>
-          <time class="job-period" datetime="2021">2021 - 2022</time>
-        </div>
-        <p class="job-description">
-          Built the real-time data pipeline powering passenger information displays across 200+ bus stops
-          for Singapore's Land Transport Authority.
-        </p>
-        <div class="tech-tags">
-          <span class="tech-tag">Elixir</span>
-          <span class="tech-tag">Phoenix</span>
-          <span class="tech-tag">LiveView</span>
-          <span class="tech-tag">Redis</span>
-          <span class="tech-tag">React</span>
-          <span class="tech-tag">PostgreSQL</span>
-          <span class="tech-tag">AWS Lambda</span>
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">TDD</span>
+        <time class="job-period" datetime="2021">2021 – 2022</time>
+        <div class="job-content">
+          <h3 class="job-title">Passenger Information Display System — LTA</h3>
+          <a href="https://www.lta.gov.sg/content/ltagov/en/newsroom/2021/9/news-releases/New_PIDS_at_more_than_300_bus_stops.html"
+            target="_blank" rel="noopener noreferrer" class="company-link">
+            Land Transport Authority — Singapore
+          </a>
+          <p class="job-description">
+            Built the real-time data pipeline powering passenger information displays across 200+
+            bus stops for Singapore's Land Transport Authority, serving millions of daily commuters.
+            Arrival predictions were ingested via AWS Lambda, processed through an Elixir/Phoenix
+            backend, and distributed via Redis pub/sub to Phoenix LiveView display clients.
+            OTP supervisors scoped per bus stop cluster ensured partial failures stayed partial —
+            a bad data event at one stop could not cascade across the network.
+          </p>
+          <p class="tech-inline">Elixir · Phoenix · LiveView · Redis · AWS Lambda · PostgreSQL · React · Python</p>
         </div>
       </article>
+
     </div>
 
+    <!-- ─── Education ─── -->
     <h2 class="section-header">Education</h2>
 
-    <div class="education-grid">
-      <div class="education-card">
-        <h3 class="degree-title">Master of Science in Computer Science</h3>
-        <div class="institution">Asian Institute of Technology - TH</div>
-        <time class="edu-period" datetime="2025">2025 - Present</time>
-        <p class="edu-details">
-          <strong>CGPA:</strong> 3.55/4.0<br>
-          <strong>Courses:</strong> <strong>Theory of Computation</strong>, <strong>Algorithm Design and
-            Analysis</strong>, <strong>Programming Language and Compilers</strong>, <strong>Data Engineering and
-            MLOps</strong>, <strong>Machine Learning</strong>, <strong>Full-stack Application Development</strong>,
-          <strong>Computer Networks</strong>, <strong>Data Modeling and Management</strong>, <strong>Business of
-            Frontier Technologies</strong>.
-        </p>
-      </div>
+    <div class="experience-grid">
 
-      <div class="education-card">
-        <h3 class="degree-title">Bachelor of Science (Hons) in Computing</h3>
-        <div class="institution">University of Greenwich - UK</div>
-        <time class="edu-period" datetime="2022">2022 - 2023</time>
-        <p class="edu-details">
-          <strong>Grade:</strong> First Class Honours<br>
-          <strong>Courses:</strong> <strong>Human Computer Interaction and Design</strong>, <strong>Requirement
-            Management</strong>, <strong>Enterprise Web Software Development</strong>, <strong>Mobile Design and
-            Development</strong>.
-        </p>
-      </div>
+      <article class="experience-card">
+        <time class="job-period" datetime="2025">2025 – Present</time>
+        <div class="job-content">
+          <h3 class="job-title">Master of Science in Computer Science</h3>
+          <a href="https://ait.ac.th/" target="_blank" rel="noopener noreferrer" class="company-link">
+            Asian Institute of Technology — Thailand
+          </a>
+          <p class="job-description">
+            CGPA 3.55 / 4.0. Coursework spanning algorithm design and analysis, theory of
+            computation, programming languages and compilers, data engineering and MLOps,
+            machine learning, computer networks, and data modelling.
+          </p>
+        </div>
+      </article>
 
-      <div class="education-card">
-        <h3 class="degree-title">Advanced Diploma in Computing</h3>
-        <div class="institution">Scottish Qualifications Authority - UK</div>
-        <time class="edu-period" datetime="2020">2020 - 2022</time>
-        <p class="edu-details">
-          <strong>Grade:</strong> SCQF Level 8<br>
-          <strong>Courses:</strong> <strong>Computer Systems Fundamentals</strong>, <strong>Client Operating
-            Systems</strong>, <strong>Convergence Technologies</strong>, <strong>Digital Forensics</strong>,
-          <strong>Mathematics for Computing</strong>, <strong>Routing Technology</strong>, <strong>Server
-            Administration</strong>, <strong>Switching Technology</strong>, <strong>Professionalism & Ethics in
-            Computing</strong>.
-        </p>
+      <article class="experience-card">
+        <time class="job-period" datetime="2022">2022 – 2023</time>
+        <div class="job-content">
+          <h3 class="job-title">Bachelor of Science (Hons) in Computing</h3>
+          <a href="https://www.gre.ac.uk/" target="_blank" rel="noopener noreferrer" class="company-link">
+            University of Greenwich — United Kingdom
+          </a>
+          <p class="job-description">
+            First Class Honours. Coursework in enterprise web software development,
+            mobile design and development, human–computer interaction, and requirements
+            management.
+          </p>
+        </div>
+      </article>
+
+      <article class="experience-card">
+        <time class="job-period" datetime="2020">2020 – 2022</time>
+        <div class="job-content">
+          <h3 class="job-title">Advanced Diploma in Computing</h3>
+          <a href="https://www.sqa.org.uk/" target="_blank" rel="noopener noreferrer" class="company-link">
+            Scottish Qualifications Authority — United Kingdom
+          </a>
+          <p class="job-description">
+            SCQF Level 8. Coursework in computer systems, routing and switching technology,
+            server administration, digital forensics, mathematics for computing, and
+            convergence technologies.
+          </p>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- ─── Engineering Stack ─── -->
+    <h2 class="section-header">Engineering Stack</h2>
+
+    <div class="stack-grid">
+      <div class="stack-layer">
+        <p class="stack-label">Runtime</p>
+        <div class="stack-tags">
+          <span class="stack-tag">Elixir / OTP</span>
+          <span class="stack-tag">Node.js</span>
+          <span class="stack-tag">TypeScript</span>
+          <span class="stack-tag">Python</span>
+        </div>
+      </div>
+      <div class="stack-layer">
+        <p class="stack-label">Frameworks</p>
+        <div class="stack-tags">
+          <span class="stack-tag">Phoenix</span>
+          <span class="stack-tag">LiveView</span>
+          <span class="stack-tag">Absinthe</span>
+          <span class="stack-tag">React</span>
+          <span class="stack-tag">Next.js</span>
+        </div>
+      </div>
+      <div class="stack-layer">
+        <p class="stack-label">Messaging</p>
+        <div class="stack-tags">
+          <span class="stack-tag">RabbitMQ</span>
+          <span class="stack-tag">Kafka</span>
+          <span class="stack-tag">Redis pub/sub</span>
+          <span class="stack-tag">MQTT</span>
+          <span class="stack-tag">WebSockets</span>
+        </div>
+      </div>
+      <div class="stack-layer">
+        <p class="stack-label">Infrastructure</p>
+        <div class="stack-tags">
+          <span class="stack-tag">AWS</span>
+          <span class="stack-tag">Oracle Cloud</span>
+          <span class="stack-tag">Huawei Cloud</span>
+          <span class="stack-tag">Kubernetes</span>
+          <span class="stack-tag">Docker</span>
+        </div>
+      </div>
+      <div class="stack-layer">
+        <p class="stack-label">IoT Protocols</p>
+        <div class="stack-tags">
+          <span class="stack-tag">LoRaWAN</span>
+          <span class="stack-tag">BLE</span>
+          <span class="stack-tag">MQTT</span>
+          <span class="stack-tag">UART</span>
+        </div>
+      </div>
+      <div class="stack-layer">
+        <p class="stack-label">Data</p>
+        <div class="stack-tags">
+          <span class="stack-tag">PostgreSQL</span>
+          <span class="stack-tag">MySQL</span>
+          <span class="stack-tag">Redis</span>
+          <span class="stack-tag">GraphQL</span>
+        </div>
       </div>
     </div>
 
-    <h2 class="section-header">Licenses & Certifications</h2>
+    <!-- ─── Engineering Notes ─── -->
+    <h2 class="section-header">Engineering Notes</h2>
 
-    <div class="cert-grid">
-      <div class="cert-card">
-        <span class="cert-title">IELTS - Band 8.0</span>
-        <span class="cert-institution">British Council &bull; <time datetime="2025-03">Mar 2025</time></span>
-      </div>
+    <div class="notes-list" role="list">
 
-      <div class="cert-card">
-        <span class="cert-title"><a href="https://www.credly.com/badges/5a194053-8f44-4ee3-b4d7-cd4c977ef2a6/public_url"
-            target="_blank" rel="noopener noreferrer">AWS Certified Developer - Associate</a></span>
-        <span class="cert-institution">Amazon Web Services &bull; <time datetime="2022-11">Nov 2022</time></span>
+      <a href="notes/websocket-reconnection.html" class="note-item" role="listitem">
+        <p class="note-title">Designing for Reconnection: WebSocket State at Scale</p>
+        <p class="note-summary">
+          The real design problem in WebSocket systems is not connection — it is reconnection.
+          How to restore session state, replay missed messages, and avoid thundering herd
+          when thousands of clients reconnect simultaneously.
+        </p>
+        <span class="note-status">In progress</span>
+      </a>
+
+      <a href="notes/otp-supervision.html" class="note-item" role="listitem">
+        <p class="note-title">The OTP Supervision Tree as an Architecture Pattern</p>
+        <p class="note-summary">
+          The supervision tree is the architecture diagram. Scoping supervisors to logical
+          failure domains keeps partial failures partial — and makes the failure model
+          explicit rather than emergent.
+        </p>
+        <span class="note-status">In progress</span>
+      </a>
+
+      <a href="notes/kafka-vs-rabbitmq.html" class="note-item" role="listitem">
+        <p class="note-title">Kafka vs RabbitMQ: A Systems Engineering Decision</p>
+        <p class="note-summary">
+          Not a feature comparison — a decision framework. RabbitMQ models the routing
+          problem; Kafka models the log problem. How to reason about the choice
+          before you build.
+        </p>
+        <span class="note-status">In progress</span>
+      </a>
+
+      <a href="notes/iot-telemetry-scaling.html" class="note-item" role="listitem">
+        <p class="note-title">Scaling IoT Telemetry Ingestion: Protocol Heterogeneity</p>
+        <p class="note-summary">
+          MQTT, LoRaWAN, and BLE have different QoS models, payload formats, and failure
+          characteristics. Why a generic ingestion layer is the wrong abstraction, and
+          how protocol-specific services compose cleanly at the normalisation layer.
+        </p>
+        <span class="note-status">In progress</span>
+      </a>
+
+      <a href="notes/backpressure.html" class="note-item" role="listitem">
+        <p class="note-title">Backpressure in Event-Driven Systems</p>
+        <p class="note-summary">
+          Bursty device telemetry will overwhelm a naive ingestion pipeline. A practical
+          look at backpressure strategies: RabbitMQ consumer prefetch, Kafka consumer
+          group lag, and GenStage demand-driven pipelines in Elixir.
+        </p>
+        <span class="note-status">In progress</span>
+      </a>
+
+    </div>
+
+    <!-- ─── Now ─── -->
+    <h2 class="section-header">Now</h2>
+
+    <ul class="now-list">
+      <li>
+        Software Engineer at Cadmus (Melbourne) — building Elixir/Phoenix assessment
+        infrastructure serving 60+ universities across Australia and internationally.
+      </li>
+      <li>
+        M.Sc Computer Science at Asian Institute of Technology — coursework in algorithm
+        design, data engineering, compilers, MLOps, and computer networks. CGPA: 3.55/4.0.
+      </li>
+    </ul>
+    <p class="now-updated">Last updated: March 2026</p>
+
+
+    <!-- ─── Contact ─── -->
+    <h2 class="section-header" style="margin-top: 50px;">Contact</h2>
+
+    <div class="contact-content">
+      <div class="contact-links">
+        <a href="mailto:alex.sin@cadmus.io">alex.sin@cadmus.io</a>
+        <a href="https://linkedin.com/in/alexsindev" target="_blank"
+          rel="noopener noreferrer">linkedin.com/in/alexsindev</a>
+        <a href="https://github.com/alexsindev" target="_blank" rel="noopener noreferrer">github.com/alexsindev</a>
       </div>
     </div>
+
   </main>
 
   <footer>
-    <nav aria-label="Social links" class="contact-info" style="margin-bottom: 15px;">
-      <a href="https://github.com/alexsindev" target="_blank" rel="noopener noreferrer" class="contact-link">github</a>
-      <a href="https://linkedin.com/in/alexsindev" target="_blank" rel="noopener noreferrer"
-        class="contact-link">linkedin</a>
-      <a href="mailto:alex.sin@cadmus.io" class="contact-link">alex.sin@cadmus.io</a>
-    </nav>
-    <a href="https://alexsindev.github.io">alexsindev.github.io - 2026</a>
+    <a href="https://alexsindev.github.io">alexsindev.github.io &mdash; 2026</a>
   </footer>
 
   <script>
     // Scroll-triggered fade-in for cards
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -774,51 +885,16 @@
           entry.target.style.transform = 'translateY(0)';
         }
       });
-    }, observerOptions);
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    document.querySelectorAll('.experience-card, .education-card, .cert-card').forEach(card => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(30px)';
-      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(card);
+    document.querySelectorAll('.experience-card, .note-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
     });
-
-    // Subtle cursor glow effect (desktop/fine pointer only)
-    if (window.matchMedia('(pointer: fine)').matches) {
-      const cursor = document.createElement('div');
-      cursor.setAttribute('aria-hidden', 'true');
-      cursor.style.cssText = `
-        position: fixed;
-        width: 12px;
-        height: 12px;
-        background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9999;
-        opacity: 0.4;
-        will-change: transform;
-        top: 0;
-        left: 0;
-      `;
-      document.body.appendChild(cursor);
-
-      let mouseX = 0, mouseY = 0;
-      let cursorX = 0, cursorY = 0;
-
-      document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-      });
-
-      function updateCursor() {
-        cursorX += (mouseX - cursorX) * 0.15;
-        cursorY += (mouseY - cursorY) * 0.15;
-        cursor.style.transform = `translate3d(${cursorX - 6}px, ${cursorY - 6}px, 0)`;
-        requestAnimationFrame(updateCursor);
-      }
-      updateCursor();
-    }
   </script>
+
 </body>
 
 </html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Designing for Reconnection: WebSocket State at Scale — Alex Sin</title>
+  <meta name="description" content="The real design problem in WebSocket systems is not connection — it is reconnection. Notes on session state, message replay, and thundering herd at scale.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>λ</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary-bg: #0f1419; --secondary-bg: #161d24; --text-primary: #e8e6e3;
+      --text-secondary: #9ca3af; --accent-color: #6b9a78; --border-color: #2d3741;
+      --heading-font: 'Cormorant Garamond', Georgia, serif;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --primary-bg: #fafaf9; --secondary-bg: #f0efed; --text-primary: #1a1a1a;
+        --text-secondary: #555b64; --accent-color: #4a7a58; --border-color: #d1d5db;
+      }
+    }
+    body {
+      font-family: 'Roboto', -apple-system, sans-serif; background: var(--primary-bg);
+      color: var(--text-primary); line-height: 1.6;
+    }
+    .container { max-width: 720px; margin: 0 auto; padding: 60px 20px; }
+    .back-link {
+      font-family: var(--heading-font); font-size: 0.9rem; color: var(--text-secondary);
+      text-decoration: none; display: inline-block; margin-bottom: 40px;
+      transition: color 0.2s ease;
+    }
+    .back-link:hover { color: var(--text-primary); }
+    .note-meta {
+      font-size: 0.75rem; color: var(--accent-color); text-transform: uppercase;
+      letter-spacing: 0.1em; margin-bottom: 16px;
+    }
+    h1 {
+      font-family: var(--heading-font); font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 600; color: var(--text-primary); letter-spacing: 0.03em;
+      line-height: 1.2; margin-bottom: 8px;
+    }
+    .status-bar {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 0; border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color); margin: 28px 0;
+    }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-color); }
+    .status-text { font-size: 0.78rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em; }
+    .note-body p {
+      font-family: var(--heading-font); font-size: 1.05rem; color: var(--text-secondary);
+      line-height: 1.8; margin-bottom: 20px;
+    }
+    .note-body h2 {
+      font-family: var(--heading-font); font-size: 1.3rem; font-weight: 600;
+      color: var(--text-primary); margin: 32px 0 12px; letter-spacing: 0.02em;
+    }
+    .note-body code {
+      font-family: monospace; font-size: 0.9em; background: var(--secondary-bg);
+      padding: 2px 6px; border-radius: 2px; color: var(--accent-color);
+    }
+    .wip-notice {
+      border: 1px solid var(--border-color); padding: 16px 20px; margin-top: 40px;
+    }
+    .wip-notice p {
+      font-family: var(--heading-font); font-size: 0.95rem; color: var(--text-secondary);
+      line-height: 1.6; margin: 0;
+    }
+    :focus-visible { outline: 2px solid var(--accent-color); outline-offset: 2px; }
+    @media (max-width: 600px) { .container { padding: 30px 16px; } }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <a href="../index.html" class="back-link">← alexsindev.github.io</a>
+
+    <p class="note-meta">Engineering Notes</p>
+    <h1>Designing for Reconnection: WebSocket State at Scale</h1>
+
+    <div class="status-bar">
+      <div class="status-dot"></div>
+      <span class="status-text">In progress — March 2026</span>
+    </div>
+
+    <div class="note-body">
+      <p>
+        Most WebSocket tutorials end at "connection established." The real engineering problem
+        begins when that connection drops — and at scale, it will drop constantly. Mobile clients
+        switch networks. Load balancers time out idle connections. Servers restart. The design
+        question is not how you handle a connected client; it is what state the client is in
+        when it comes back.
+      </p>
+
+      <h2>The state problem</h2>
+      <p>
+        A WebSocket connection is stateful by nature. The challenge is that <em>your application
+        state</em> does not have to be. In the ATalk messaging platform, the connection layer held
+        no application state — session data lived in Redis, message queues lived in RabbitMQ.
+        When a client reconnected to a different server instance, the new instance fetched session
+        state from Redis and replayed any unacknowledged messages from the RabbitMQ queue.
+        The connection was ephemeral; the data was not.
+      </p>
+
+      <h2>Message replay vs. polling</h2>
+      <p>
+        The naive approach to reconnection is to have the client re-fetch state from a REST endpoint.
+        This works at low scale but creates a polling spike whenever a large number of clients
+        reconnect simultaneously — the thundering herd problem. A better model is cursor-based
+        replay: the client sends its last acknowledged message ID on reconnect, and the server
+        streams only the delta. This is how Kafka consumers work, and it is the right model for
+        any system where message ordering matters.
+      </p>
+
+      <h2>Thundering herd on reconnect</h2>
+      <p>
+        When a server restarts, all connected clients attempt to reconnect within a short window.
+        Naive retry logic (reconnect immediately on disconnect) converts a single server restart
+        into a thundering herd. The mitigation is exponential backoff with jitter on the client
+        side, combined with a connection rate limiter on the server side. Socket.io supports
+        configurable reconnection backoff; raw WebSocket implementations need this added explicitly.
+      </p>
+
+      <h2>Sticky sessions vs. session-agnostic design</h2>
+      <p>
+        Sticky sessions (routing a client to the same server instance on reconnect) are tempting
+        but fragile — they fail when the server instance is gone, which is exactly when reconnection
+        happens. The better design makes the connection layer session-agnostic: any instance can
+        handle any client, because session state is external. This requires more infrastructure
+        (Redis for session, a message bus for delivery) but eliminates a whole class of failure modes.
+      </p>
+    </div>
+
+    <div class="wip-notice">
+      <p>
+        This note is a work in progress. Full write-up covering Socket.io Redis adapter configuration,
+        RabbitMQ consumer acknowledgement patterns, and load test results from the ATalk platform
+        is forthcoming.
+      </p>
+    </div>
+  </main>
+</body>
+</html>

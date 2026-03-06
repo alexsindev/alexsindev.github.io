@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The OTP Supervision Tree as an Architecture Pattern — Alex Sin</title>
+  <meta name="description" content="The supervision tree is the architecture diagram. Scoping supervisors to logical failure domains keeps partial failures partial.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>λ</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary-bg: #0f1419; --secondary-bg: #161d24; --text-primary: #e8e6e3;
+      --text-secondary: #9ca3af; --accent-color: #6b9a78; --border-color: #2d3741;
+      --heading-font: 'Cormorant Garamond', Georgia, serif;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --primary-bg: #fafaf9; --secondary-bg: #f0efed; --text-primary: #1a1a1a;
+        --text-secondary: #555b64; --accent-color: #4a7a58; --border-color: #d1d5db;
+      }
+    }
+    body {
+      font-family: 'Roboto', -apple-system, sans-serif; background: var(--primary-bg);
+      color: var(--text-primary); line-height: 1.6;
+    }
+    .container { max-width: 720px; margin: 0 auto; padding: 60px 20px; }
+    .back-link {
+      font-family: var(--heading-font); font-size: 0.9rem; color: var(--text-secondary);
+      text-decoration: none; display: inline-block; margin-bottom: 40px;
+      transition: color 0.2s ease;
+    }
+    .back-link:hover { color: var(--text-primary); }
+    .note-meta { font-size: 0.75rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+    h1 {
+      font-family: var(--heading-font); font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 600; color: var(--text-primary); letter-spacing: 0.03em;
+      line-height: 1.2; margin-bottom: 8px;
+    }
+    .status-bar {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 0; border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color); margin: 28px 0;
+    }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-color); }
+    .status-text { font-size: 0.78rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em; }
+    .note-body p {
+      font-family: var(--heading-font); font-size: 1.05rem; color: var(--text-secondary);
+      line-height: 1.8; margin-bottom: 20px;
+    }
+    .note-body h2 {
+      font-family: var(--heading-font); font-size: 1.3rem; font-weight: 600;
+      color: var(--text-primary); margin: 32px 0 12px; letter-spacing: 0.02em;
+    }
+    .note-body code {
+      font-family: monospace; font-size: 0.9em; background: var(--secondary-bg);
+      padding: 2px 6px; border-radius: 2px; color: var(--accent-color);
+    }
+    pre {
+      background: var(--secondary-bg); border: 1px solid var(--border-color);
+      padding: 16px; overflow-x: auto; margin: 20px 0;
+    }
+    pre code { background: none; padding: 0; font-size: 0.85rem; color: var(--text-secondary); }
+    .wip-notice { border: 1px solid var(--border-color); padding: 16px 20px; margin-top: 40px; }
+    .wip-notice p { font-family: var(--heading-font); font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+    :focus-visible { outline: 2px solid var(--accent-color); outline-offset: 2px; }
+    @media (max-width: 600px) { .container { padding: 30px 16px; } }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <a href="../index.html" class="back-link">← alexsindev.github.io</a>
+
+    <p class="note-meta">Engineering Notes</p>
+    <h1>The OTP Supervision Tree as an Architecture Pattern</h1>
+
+    <div class="status-bar">
+      <div class="status-dot"></div>
+      <span class="status-text">In progress — March 2026</span>
+    </div>
+
+    <div class="note-body">
+      <p>
+        In most systems, the failure model is implicit. You find out what fails together
+        when something goes wrong in production. In Elixir's OTP, the failure model is
+        declared upfront in the supervision tree — and that declaration is the architecture.
+        The tree tells you exactly what restarts when something crashes, and what it takes down
+        with it.
+      </p>
+
+      <h2>The process boundary is the unit of isolation</h2>
+      <p>
+        In OTP, every meaningful piece of state lives in a process. Processes are isolated —
+        a crash in one process cannot corrupt the memory of another. Supervisors watch processes
+        and restart them according to a defined strategy: <code>one_for_one</code> (restart only
+        the crashed process), <code>one_for_all</code> (restart everything under the supervisor),
+        or <code>rest_for_one</code> (restart the crashed process and everything started after it).
+        Choosing the right strategy for each supervisor is the act of declaring your failure model.
+      </p>
+
+      <h2>Scoping supervisors to logical domains</h2>
+      <p>
+        In the Singapore PIDS system, the supervisor tree was scoped to bus stop clusters.
+        Each cluster ran under its own supervisor. A corrupted data event at one cluster —
+        a malformed arrival prediction, a Redis timeout — triggered a restart of that cluster's
+        processes, not the entire display network. The other 199 bus stops continued operating
+        normally because they were under separate supervisors.
+      </p>
+      <p>
+        The alternative — a single supervisor for all display processes — would have made the
+        blast radius of any failure equal to the entire system. Scoping supervisors correctly
+        is the most important architectural decision in an OTP system.
+      </p>
+
+      <h2>The supervision tree as documentation</h2>
+      <p>
+        A well-structured supervision tree is the most honest piece of architecture documentation
+        a system has. It shows exactly what processes exist, how they are related, and what
+        happens when each one fails. In Cadmus's exam platform, each active exam session is a
+        supervised process. The tree makes it immediately clear that exam sessions are isolated
+        from each other — a crash in one exam cannot affect another. That is not a comment in
+        the code; it is enforced by the runtime.
+      </p>
+
+      <pre><code># A supervisor scoped to a logical domain
+defmodule PIDS.BusStop.Supervisor do
+  use Supervisor
+
+  def start_link(stop_id) do
+    Supervisor.start_link(__MODULE__, stop_id, name: via(stop_id))
+  end
+
+  def init(stop_id) do
+    children = [
+      {PIDS.BusStop.DataFetcher, stop_id},
+      {PIDS.BusStop.DisplayBroadcaster, stop_id}
+    ]
+    # one_for_one: a fetcher crash does not restart the broadcaster
+    Supervisor.init(children, strategy: :one_for_one)
+  end
+end</code></pre>
+    </div>
+
+    <div class="wip-notice">
+      <p>
+        This note is a work in progress. The full post will cover dynamic supervisors
+        (<code>DynamicSupervisor</code>) for runtime-created processes, restart intensity
+        configuration, and observability via <code>:telemetry</code> and LiveDashboard.
+      </p>
+    </div>
+  </main>
+</body>
+</html>

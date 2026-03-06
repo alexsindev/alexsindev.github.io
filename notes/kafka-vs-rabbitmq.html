@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kafka vs RabbitMQ: A Systems Engineering Decision — Alex Sin</title>
+  <meta name="description" content="Not a feature comparison — a decision framework. RabbitMQ models the routing problem; Kafka models the log problem.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>λ</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary-bg: #0f1419; --secondary-bg: #161d24; --text-primary: #e8e6e3;
+      --text-secondary: #9ca3af; --accent-color: #6b9a78; --border-color: #2d3741;
+      --heading-font: 'Cormorant Garamond', Georgia, serif;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --primary-bg: #fafaf9; --secondary-bg: #f0efed; --text-primary: #1a1a1a;
+        --text-secondary: #555b64; --accent-color: #4a7a58; --border-color: #d1d5db;
+      }
+    }
+    body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--primary-bg); color: var(--text-primary); line-height: 1.6; }
+    .container { max-width: 720px; margin: 0 auto; padding: 60px 20px; }
+    .back-link { font-family: var(--heading-font); font-size: 0.9rem; color: var(--text-secondary); text-decoration: none; display: inline-block; margin-bottom: 40px; transition: color 0.2s ease; }
+    .back-link:hover { color: var(--text-primary); }
+    .note-meta { font-size: 0.75rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+    h1 { font-family: var(--heading-font); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 600; color: var(--text-primary); letter-spacing: 0.03em; line-height: 1.2; margin-bottom: 8px; }
+    .status-bar { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); margin: 28px 0; }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-color); }
+    .status-text { font-size: 0.78rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em; }
+    .note-body p { font-family: var(--heading-font); font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px; }
+    .note-body h2 { font-family: var(--heading-font); font-size: 1.3rem; font-weight: 600; color: var(--text-primary); margin: 32px 0 12px; letter-spacing: 0.02em; }
+    .comparison-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-family: var(--heading-font); }
+    .comparison-table th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-color); padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border-color); font-weight: 500; }
+    .comparison-table td { font-size: 0.95rem; color: var(--text-secondary); padding: 10px 12px; border-bottom: 1px solid var(--border-color); line-height: 1.5; vertical-align: top; }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .wip-notice { border: 1px solid var(--border-color); padding: 16px 20px; margin-top: 40px; }
+    .wip-notice p { font-family: var(--heading-font); font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+    :focus-visible { outline: 2px solid var(--accent-color); outline-offset: 2px; }
+    @media (max-width: 600px) { .container { padding: 30px 16px; } .comparison-table { font-size: 0.9rem; } }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <a href="../index.html" class="back-link">← alexsindev.github.io</a>
+
+    <p class="note-meta">Engineering Notes</p>
+    <h1>Kafka vs RabbitMQ: A Systems Engineering Decision</h1>
+
+    <div class="status-bar">
+      <div class="status-dot"></div>
+      <span class="status-text">In progress — March 2026</span>
+    </div>
+
+    <div class="note-body">
+      <p>
+        This is not a feature comparison. Both tools work. The question is which mental model
+        matches the problem you are solving. Choosing the wrong one creates friction at every
+        layer — the API fights you, the operational model fights you, and the failure modes
+        surprise you.
+      </p>
+
+      <h2>Two different models</h2>
+      <p>
+        RabbitMQ models the <em>routing</em> problem. A producer publishes a message to an exchange;
+        the exchange routes it to one or more queues based on bindings; consumers read from queues.
+        Once a consumer acknowledges a message, RabbitMQ deletes it. The broker is smart; the
+        consumers are simple.
+      </p>
+      <p>
+        Kafka models the <em>log</em> problem. A producer appends events to a topic partition.
+        Consumers read from an offset and track their own position. Messages are retained for a
+        configurable period — independent of whether they have been consumed. The log is
+        durable; consumers can replay it. The broker is simple; the consumers track their own state.
+      </p>
+
+      <h2>The decision framework</h2>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Points to RabbitMQ</th>
+            <th>Points to Kafka</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Do messages have individual routing logic?</td>
+            <td>Yes — per-message routing, topic exchanges, fanout</td>
+            <td>No — all consumers in a group get the same partition</td>
+          </tr>
+          <tr>
+            <td>Do consumers need to replay historical events?</td>
+            <td>No — message deleted on ack</td>
+            <td>Yes — offset reset to any point in the log</td>
+          </tr>
+          <tr>
+            <td>Is delivery acknowledgement per-message critical?</td>
+            <td>Yes — consumer ack model is first-class</td>
+            <td>Offset-based; partial ack is awkward</td>
+          </tr>
+          <tr>
+            <td>Do you need event sourcing or audit trail?</td>
+            <td>Not naturally</td>
+            <td>Yes — the log is the source of truth</td>
+          </tr>
+          <tr>
+            <td>Is throughput the primary constraint?</td>
+            <td>Moderate throughput; operational simplicity</td>
+            <td>High throughput; partition-based parallelism</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>How this played out in practice</h2>
+      <p>
+        ATalk (banking messaging platform) used RabbitMQ. The problem was per-user message
+        routing with guaranteed delivery — each user had a durable queue, messages were routed
+        to the right queue by the exchange, and consumer acknowledgement ensured no message
+        was lost on disconnect. RabbitMQ's model matched exactly.
+      </p>
+      <p>
+        An IoT analytics pipeline with replay requirements — where a new downstream consumer
+        needs to process all historical telemetry, not just messages going forward — is a
+        Kafka problem. The log retention model makes this trivial. Trying to solve it with
+        RabbitMQ requires a separate persistence layer and complicates the consumer significantly.
+      </p>
+    </div>
+
+    <div class="wip-notice">
+      <p>
+        Full post will include operational considerations (RabbitMQ management UI vs Kafka
+        consumer group tooling), failure mode comparison, and notes on running both in
+        Docker/Kubernetes environments.
+      </p>
+    </div>
+  </main>
+</body>
+</html>
