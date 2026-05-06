@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alex Sin | Systems Software Engineer</title>
+  <title>Alex Sin | SWE @ Cadmus · CS @ AIT</title>
 
   <!-- SEO Meta Tags -->
   <meta name="description"
-    content="Alex Sin - Systems Software Engineer with 5+ years in distributed systems, real-time infrastructure, IoT telemetry pipelines, and cloud-native microservices across Singapore, Southeast Asia, and Australia.">
+    content="Alex Sin — Software Engineer at Cadmus and MS CS student at AIT. 5 years of full-stack engineering across Elixir, Node.js, and React, from real-time bus stop displays in Singapore to university assessment infrastructure across Australia, UK, US, and ME.">
   <meta name="keywords"
-    content="Alex Sin, Systems Engineer, Distributed Systems, Elixir, Phoenix, Real-Time Systems, IoT, RabbitMQ, WebSockets, Kafka, Node.js, Kubernetes">
+    content="Alex Sin, Software Engineer, Elixir, Phoenix, Node.js, TypeScript, React, GraphQL, PostgreSQL, MySQL, Docker, Kubernetes, AWS, Cadmus, full-stack">
   <meta name="author" content="Alex Sin">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://alexsindev.github.io/">
@@ -18,17 +18,17 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://alexsindev.github.io/">
-  <meta property="og:title" content="Alex Sin | Systems Software Engineer">
+  <meta property="og:title" content="Alex Sin | SWE @ Cadmus · CS @ AIT">
   <meta property="og:description"
-    content="Systems Software Engineer specialising in distributed systems, real-time infrastructure, and IoT telemetry pipelines.">
+    content="Software Engineer at Cadmus and MS CS student at AIT. 5 years of full-stack engineering across Elixir, Node.js, and React.">
   <meta property="og:image" content="https://alexsindev.github.io/profile_pic.jpeg">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://alexsindev.github.io/">
-  <meta name="twitter:title" content="Alex Sin | Systems Software Engineer">
+  <meta name="twitter:title" content="Alex Sin | SWE @ Cadmus · CS @ AIT">
   <meta name="twitter:description"
-    content="Systems Software Engineer specialising in distributed systems, real-time infrastructure, and IoT telemetry pipelines.">
+    content="Software Engineer at Cadmus and MS CS student at AIT. 5 years of full-stack engineering across Elixir, Node.js, and React.">
   <meta name="twitter:image" content="https://alexsindev.github.io/profile_pic.jpeg">
 
   <meta name="theme-color" content="#0f1419">
@@ -39,10 +39,10 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Alex Sin",
-    "description": "Systems Software Engineer specialising in distributed systems, real-time infrastructure, and IoT telemetry pipelines.",
+    "description": "Software Engineer at Cadmus and MS CS student at AIT. 5 years of full-stack engineering across Elixir, Node.js, and React.",
     "url": "https://alexsindev.github.io",
     "image": "https://alexsindev.github.io/profile_pic.jpeg",
-    "jobTitle": "Systems Software Engineer",
+    "jobTitle": "Software Engineer",
     "alumniOf": [
       { "@type": "CollegeOrUniversity", "name": "Asian Institute of Technology" },
       { "@type": "CollegeOrUniversity", "name": "University of Greenwich" }
@@ -52,8 +52,8 @@
       "https://linkedin.com/in/alexsindev"
     ],
     "knowsAbout": [
-      "Elixir", "Distributed Systems", "Real-Time Systems", "IoT",
-      "RabbitMQ", "Kafka", "WebSockets", "Node.js", "TypeScript", "Kubernetes"
+      "Elixir", "Phoenix", "Node.js", "TypeScript", "React", "GraphQL",
+      "PostgreSQL", "MySQL", "Docker", "Kubernetes", "AWS"
     ]
   }
   </script>
@@ -306,6 +306,30 @@
       color: var(--text-secondary);
       font-style: italic;
       opacity: 0.55;
+    }
+
+    .job-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .job-bullets li {
+      font-family: var(--heading-font);
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.7;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .job-bullets li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--accent-color);
     }
 
     /* ─── Engineering Stack ─── */
@@ -572,13 +596,12 @@
     <section class="hero" aria-label="Introduction">
       <img src="profile_pic.jpeg" alt="Alex Sin" class="profile-image" loading="eager" decoding="async">
       <h1>Alex Sin</h1>
-      <p class="hero-role">Systems Software Engineer</p>
-      <p class="hero-stack">Elixir · Node.js · Distributed Systems · Real-Time Infrastructure</p>
+      <p class="hero-role">SWE @ Cadmus &bull; CS @ AIT</p>
       <p class="intro">
-        Five years designing and operating distributed systems in production —
-        real-time transport infrastructure, IoT telemetry pipelines,
-        event-driven messaging, and cloud-native microservices across
-        Singapore, Southeast Asia, and Australia.
+        I build systems that power things people rely on, from real-time displays at 200+ Singapore bus stops
+        to assessment infrastructure used across universities in Australia, UK, US, and ME.
+        5 years of full-stack engineering across Elixir, Node.js, and React.
+        Currently pursuing a Masters in CS while engineering full-time at Cadmus.
       </p>
       <nav class="contact-info" aria-label="Contact links">
         <a href="https://github.com/alexsindev" target="_blank" rel="noopener noreferrer"
@@ -595,76 +618,53 @@
     <div class="experience-grid">
 
       <article class="experience-card">
-        <time class="job-period" datetime="2024">2024 – Present</time>
+        <time class="job-period" datetime="2024-11">Nov 2024 –<br>Present</time>
         <div class="job-content">
-          <h3 class="job-title">Cadmus</h3>
+          <h3 class="job-title">Cadmus — Software Engineer</h3>
           <a href="https://cadmus.io/" target="_blank" rel="noopener noreferrer" class="company-link">
-            cadmus.io — Melbourne, Australia
+            cadmus.io
           </a>
-          <p class="job-description">
-            Building assessment infrastructure for Australia's leading academic integrity platform,
-            serving 60+ universities and processing 200,000+ student submissions per semester.
-            Working across Elixir/Phoenix, Absinthe GraphQL, and React.
-          </p>
-          <p class="tech-inline">Elixir · Phoenix · Absinthe · GraphQL · React · Apollo · PostgreSQL · AWS</p>
+          <ul class="job-bullets">
+            <li>Engineer full-stack features on a university assessment platform used across Australia, UK, US, and ME.</li>
+            <li>Drive code quality through regular code reviews, RFCs, and AI-assisted tooling.</li>
+            <li>Take end-to-end ownership from inception to delivery, aligning feature development with Product OKRs.</li>
+          </ul>
         </div>
       </article>
 
       <article class="experience-card">
-        <time class="job-period" datetime="2023">2023 – 2024</time>
+        <time class="job-period" datetime="2023-07">Jul 2023 –<br>Sep 2024</time>
         <div class="job-content">
-          <h3 class="job-title">Jarvis IoT Platform — Viatick</h3>
+          <h3 class="job-title">Viatick — Full Stack Engineer</h3>
           <a href="https://viatick.com/" target="_blank" rel="noopener noreferrer" class="company-link">
-            viatick.com — Singapore
+            viatick.com
           </a>
-          <p class="job-description">
-            Designed and deployed a telemetry ingestion platform for 10,000+ IoT field devices
-            across Southeast Asia. Built protocol-specific microservices handling MQTT, LoRaWAN,
-            and BLE data streams, with a geolocation enrichment pipeline feeding operational
-            dashboards. Stateless ingest services ran on OCI serverless compute, scaling horizontally
-            to absorb bursty device telemetry. Kubernetes managed stateful workloads.
-          </p>
-          <p class="tech-inline">Node.js · TypeScript · MQTT · LoRaWAN · BLE · Oracle Cloud · Kubernetes · Docker ·
-            MySQL · React</p>
+          <ul class="job-bullets">
+            <li>Engineered serverless microservices on OCI for the Jarvis platform, delivering features including recurring event scheduling and geolocation extraction from body-worn camera footage.</li>
+            <li>Maintained code quality through static analysis, query optimisation, and Jest unit/API test coverage across OCI serverless functions.</li>
+          </ul>
         </div>
       </article>
 
       <article class="experience-card">
-        <time class="job-period" datetime="2023">2023</time>
+        <time class="job-period" datetime="2023-01">Jan 2023 –<br>Jul 2023</time>
         <div class="job-content">
-          <h3 class="job-title">ATalk — ABank Myanmar</h3>
-          <a href="https://www.abank.com.mm" target="_blank" rel="noopener noreferrer" class="company-link">
-            abank.com.mm — Yangon
-          </a>
-          <p class="job-description">
-            Architected a real-time messaging backend for a leading private bank, supporting
-            5,000+ concurrent WebSocket connections. RabbitMQ provided durable message queuing
-            decoupled from the connection layer — messages survived restarts and client reconnects
-            by design. Redis managed session state across horizontally scaled Socket.io instances.
-            WebRTC signaling and Jitsi handled integrated video and audio calling on a separate path
-            from the core messaging service.
-          </p>
-          <p class="tech-inline">Node.js · Socket.io · RabbitMQ · Redis · WebRTC · Docker · AWS EC2 · Jitsi</p>
+          <h3 class="job-title">Bagan Innovation Technology — Backend Engineer</h3>
+          <ul class="job-bullets">
+            <li>Led backend development of ATalk, a real-time WebSocket and WebRTC messaging platform for a private bank, built on Node.js, Redis, DynamoDB, and RabbitMQ.</li>
+            <li>Deployed fault-tolerant microservices on AWS/Kubernetes and built a high-performance file service with parallelised S3/Huawei OBS multipart uploads.</li>
+          </ul>
         </div>
       </article>
 
       <article class="experience-card">
-        <time class="job-period" datetime="2021">2021 – 2022</time>
+        <time class="job-period" datetime="2021-04">Apr 2021 –<br>Dec 2022</time>
         <div class="job-content">
-          <h3 class="job-title">Passenger Information Display System — LTA</h3>
-          <a href="https://www.lta.gov.sg/content/ltagov/en/newsroom/2021/9/news-releases/New_PIDS_at_more_than_300_bus_stops.html"
-            target="_blank" rel="noopener noreferrer" class="company-link">
-            Land Transport Authority — Singapore
-          </a>
-          <p class="job-description">
-            Built the real-time data pipeline powering passenger information displays across 200+
-            bus stops for Singapore's Land Transport Authority, serving millions of daily commuters.
-            Arrival predictions were ingested via AWS Lambda, processed through an Elixir/Phoenix
-            backend, and distributed via Redis pub/sub to Phoenix LiveView display clients.
-            OTP supervisors scoped per bus stop cluster ensured partial failures stayed partial —
-            a bad data event at one stop could not cascade across the network.
-          </p>
-          <p class="tech-inline">Elixir · Phoenix · LiveView · Redis · AWS Lambda · PostgreSQL · React · Python</p>
+          <h3 class="job-title">Biziolab — Software Engineer</h3>
+          <ul class="job-bullets">
+            <li>Built real-time Elixir/Phoenix microservices and LiveView UI for Singapore LTA's Passenger Information Display System, operational across 200+ bus stops.</li>
+            <li>Engineered a standalone remote monitoring app for panel control, established AWS CodeBuild CI/CD pipelines and AWS ECS.</li>
+          </ul>
         </div>
       </article>
 
@@ -676,46 +676,49 @@
     <div class="experience-grid">
 
       <article class="experience-card">
-        <time class="job-period" datetime="2025">2025 – Present</time>
+        <time class="job-period" datetime="2025-08">Aug 2025 –<br>Present</time>
         <div class="job-content">
-          <h3 class="job-title">Master of Science in Computer Science</h3>
+          <h3 class="job-title">Asian Institute of Technology — MS Computer Science</h3>
           <a href="https://ait.ac.th/" target="_blank" rel="noopener noreferrer" class="company-link">
-            Asian Institute of Technology — Thailand
+            ait.ac.th
           </a>
           <p class="job-description">
-            CGPA 3.55 / 4.0. Coursework spanning algorithm design and analysis, theory of
-            computation, programming languages and compilers, data engineering and MLOps,
-            machine learning, computer networks, and data modelling.
+            Pursuing a Masters in CS while engineering full-time at Cadmus.
           </p>
         </div>
       </article>
 
       <article class="experience-card">
-        <time class="job-period" datetime="2022">2022 – 2023</time>
+        <time class="job-period" datetime="2019-10">Oct 2019 –<br>Dec 2023</time>
         <div class="job-content">
-          <h3 class="job-title">Bachelor of Science (Hons) in Computing</h3>
+          <h3 class="job-title">University of Greenwich — BSc Computing</h3>
           <a href="https://www.gre.ac.uk/" target="_blank" rel="noopener noreferrer" class="company-link">
-            University of Greenwich — United Kingdom
+            gre.ac.uk
           </a>
           <p class="job-description">
-            First Class Honours. Coursework in enterprise web software development,
-            mobile design and development, human–computer interaction, and requirements
-            management.
+            Completed an accelerated undergrad pathway via the Scottish Qualifications Authority (SCQF Level 8),
+            graduating with First Class Honours from the University of Greenwich.
           </p>
         </div>
       </article>
 
       <article class="experience-card">
-        <time class="job-period" datetime="2020">2020 – 2022</time>
+        <time class="job-period" datetime="2020-01">Jan 2020 –<br>Feb 2021</time>
         <div class="job-content">
-          <h3 class="job-title">Advanced Diploma in Computing</h3>
-          <a href="https://www.sqa.org.uk/" target="_blank" rel="noopener noreferrer" class="company-link">
-            Scottish Qualifications Authority — United Kingdom
-          </a>
+          <h3 class="job-title">University of Yangon — BSc Mathematics</h3>
           <p class="job-description">
-            SCQF Level 8. Coursework in computer systems, routing and switching technology,
-            server administration, digital forensics, mathematics for computing, and
-            convergence technologies.
+            Pursued pure Mathematics and Physics before transitioning fully into Computing.
+          </p>
+        </div>
+      </article>
+
+      <article class="experience-card">
+        <time class="job-period" datetime="2018-01">Jan 2018 –<br>Apr 2019</time>
+        <div class="job-content">
+          <h3 class="job-title">Acmar International School — Malaysian Certificate of Education</h3>
+          <p class="job-description">
+            Graduated secondary schooling with Straight A's (6A+, 2A, 1A–), scoring A+ across all STEM subjects
+            including Physics and Additional Mathematics — equivalent to GCSEs (England) / O-Levels.
           </p>
         </div>
       </article>
@@ -727,51 +730,18 @@
 
     <div class="stack-grid">
       <div class="stack-layer">
-        <p class="stack-label">Runtime</p>
+        <p class="stack-label">Languages</p>
         <div class="stack-tags">
-          <span class="stack-tag">Elixir / OTP</span>
+          <span class="stack-tag">Elixir</span>
           <span class="stack-tag">Node.js</span>
           <span class="stack-tag">TypeScript</span>
-          <span class="stack-tag">Python</span>
         </div>
       </div>
       <div class="stack-layer">
         <p class="stack-label">Frameworks</p>
         <div class="stack-tags">
           <span class="stack-tag">Phoenix</span>
-          <span class="stack-tag">LiveView</span>
-          <span class="stack-tag">Absinthe</span>
           <span class="stack-tag">React</span>
-          <span class="stack-tag">Next.js</span>
-        </div>
-      </div>
-      <div class="stack-layer">
-        <p class="stack-label">Messaging</p>
-        <div class="stack-tags">
-          <span class="stack-tag">RabbitMQ</span>
-          <span class="stack-tag">Kafka</span>
-          <span class="stack-tag">Redis pub/sub</span>
-          <span class="stack-tag">MQTT</span>
-          <span class="stack-tag">WebSockets</span>
-        </div>
-      </div>
-      <div class="stack-layer">
-        <p class="stack-label">Infrastructure</p>
-        <div class="stack-tags">
-          <span class="stack-tag">AWS</span>
-          <span class="stack-tag">Oracle Cloud</span>
-          <span class="stack-tag">Huawei Cloud</span>
-          <span class="stack-tag">Kubernetes</span>
-          <span class="stack-tag">Docker</span>
-        </div>
-      </div>
-      <div class="stack-layer">
-        <p class="stack-label">IoT Protocols</p>
-        <div class="stack-tags">
-          <span class="stack-tag">LoRaWAN</span>
-          <span class="stack-tag">BLE</span>
-          <span class="stack-tag">MQTT</span>
-          <span class="stack-tag">UART</span>
         </div>
       </div>
       <div class="stack-layer">
@@ -779,8 +749,15 @@
         <div class="stack-tags">
           <span class="stack-tag">PostgreSQL</span>
           <span class="stack-tag">MySQL</span>
-          <span class="stack-tag">Redis</span>
           <span class="stack-tag">GraphQL</span>
+        </div>
+      </div>
+      <div class="stack-layer">
+        <p class="stack-label">Infrastructure</p>
+        <div class="stack-tags">
+          <span class="stack-tag">AWS</span>
+          <span class="stack-tag">Kubernetes</span>
+          <span class="stack-tag">Docker</span>
         </div>
       </div>
     </div>
@@ -847,15 +824,14 @@
 
     <ul class="now-list">
       <li>
-        Software Engineer at Cadmus (Melbourne) — building Elixir/Phoenix assessment
-        infrastructure serving 60+ universities across Australia and internationally.
+        Software Engineer at Cadmus — building full-stack features on a university assessment platform
+        used across Australia, UK, US, and ME.
       </li>
       <li>
-        M.Sc Computer Science at Asian Institute of Technology — coursework in algorithm
-        design, data engineering, compilers, MLOps, and computer networks. CGPA: 3.55/4.0.
+        MS Computer Science at Asian Institute of Technology — pursuing a Masters while engineering full-time.
       </li>
     </ul>
-    <p class="now-updated">Last updated: March 2026</p>
+    <p class="now-updated">Last updated: May 2026</p>
 
 
     <!-- ─── Contact ─── -->
