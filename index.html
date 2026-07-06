@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alex Sin | SWE @ Cadmus · CS @ AIT</title>
+  <title>Alex Sin | SWE @ Cadmus</title>
 
   <!-- SEO Meta Tags -->
   <meta name="description"
-    content="Alex Sin — Software Engineer at Cadmus and MS CS student at AIT. 5 years of full-stack engineering across Elixir, Node.js, and React, from real-time bus stop displays in Singapore to university assessment infrastructure across Australia, UK, US, and ME.">
+    content="Alex Sin — Software Engineer at Cadmus. 5 years of full-stack engineering across Elixir, Node.js, and React, from real-time bus stop displays in Singapore to university assessment infrastructure across Australia, UK, US, and ME.">
   <meta name="keywords"
     content="Alex Sin, Software Engineer, Elixir, Phoenix, Node.js, TypeScript, React, GraphQL, PostgreSQL, MySQL, Docker, Kubernetes, AWS, Cadmus, full-stack">
   <meta name="author" content="Alex Sin">
@@ -18,20 +18,21 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://alexsindev.github.io/">
-  <meta property="og:title" content="Alex Sin | SWE @ Cadmus · CS @ AIT">
+  <meta property="og:title" content="Alex Sin | SWE @ Cadmus">
   <meta property="og:description"
-    content="Software Engineer at Cadmus and MS CS student at AIT. 5 years of full-stack engineering across Elixir, Node.js, and React.">
+    content="Software Engineer at Cadmus. 5 years of full-stack engineering across Elixir, Node.js, and React.">
   <meta property="og:image" content="https://alexsindev.github.io/profile_pic.jpeg">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://alexsindev.github.io/">
-  <meta name="twitter:title" content="Alex Sin | SWE @ Cadmus · CS @ AIT">
+  <meta name="twitter:title" content="Alex Sin | SWE @ Cadmus">
   <meta name="twitter:description"
-    content="Software Engineer at Cadmus and MS CS student at AIT. 5 years of full-stack engineering across Elixir, Node.js, and React.">
+    content="Software Engineer at Cadmus. 5 years of full-stack engineering across Elixir, Node.js, and React.">
   <meta name="twitter:image" content="https://alexsindev.github.io/profile_pic.jpeg">
 
-  <meta name="theme-color" content="#0f1419">
+  <meta name="theme-color" content="#fafaf9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f1419" media="(prefers-color-scheme: dark)">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -39,7 +40,7 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Alex Sin",
-    "description": "Software Engineer at Cadmus and MS CS student at AIT. 5 years of full-stack engineering across Elixir, Node.js, and React.",
+    "description": "Software Engineer at Cadmus. 5 years of full-stack engineering across Elixir, Node.js, and React.",
     "url": "https://alexsindev.github.io",
     "image": "https://alexsindev.github.io/profile_pic.jpeg",
     "jobTitle": "Software Engineer",
@@ -60,7 +61,7 @@
 
   <!-- Favicon -->
   <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>λ</text></svg>">
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%22 y=%2254%22 font-size=%2295%22 text-anchor=%22middle%22 dominant-baseline=%22central%22>λ</text></svg>">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,6 +77,49 @@
     }
 
     :root {
+      --primary-bg: #fafaf9;
+      --secondary-bg: #f0efed;
+      --accent-bg: #e8e7e5;
+      --text-primary: #1a1a1a;
+      --text-secondary: #555b64;
+      --accent-color: #4a7a58;
+      --accent-hover: #3a6a48;
+      --border-color: #d1d5db;
+      --heading-font: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      --gradient: linear-gradient(135deg, #f5f5f0 0%, #fafaf9 100%);
+      --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-bg: #0f1419;
+        --secondary-bg: #161d24;
+        --accent-bg: #1c252e;
+        --text-primary: #e8e6e3;
+        --text-secondary: #9ca3af;
+        --accent-color: #6b9a78;
+        --accent-hover: #8ab89a;
+        --border-color: #2d3741;
+        --gradient: linear-gradient(135deg, #1a2633 0%, #0f1419 100%);
+        --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    /* Explicit theme overrides (set by toggle, win over prefers-color-scheme) */
+    :root[data-theme="light"] {
+      --primary-bg: #fafaf9;
+      --secondary-bg: #f0efed;
+      --accent-bg: #e8e7e5;
+      --text-primary: #1a1a1a;
+      --text-secondary: #555b64;
+      --accent-color: #4a7a58;
+      --accent-hover: #3a6a48;
+      --border-color: #d1d5db;
+      --gradient: linear-gradient(135deg, #f5f5f0 0%, #fafaf9 100%);
+      --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    :root[data-theme="dark"] {
       --primary-bg: #0f1419;
       --secondary-bg: #161d24;
       --accent-bg: #1c252e;
@@ -84,24 +128,37 @@
       --accent-color: #6b9a78;
       --accent-hover: #8ab89a;
       --border-color: #2d3741;
-      --heading-font: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
       --gradient: linear-gradient(135deg, #1a2633 0%, #0f1419 100%);
       --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
-    @media (prefers-color-scheme: light) {
-      :root {
-        --primary-bg: #fafaf9;
-        --secondary-bg: #f0efed;
-        --accent-bg: #e8e7e5;
-        --text-primary: #1a1a1a;
-        --text-secondary: #555b64;
-        --accent-color: #4a7a58;
-        --accent-hover: #3a6a48;
-        --border-color: #d1d5db;
-        --gradient: linear-gradient(135deg, #f5f5f0 0%, #fafaf9 100%);
-        --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      }
+    .theme-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 100;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      background: var(--secondary-bg);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+    }
+
+    .theme-toggle svg {
+      width: 16px;
+      height: 16px;
     }
 
     body {
@@ -176,11 +233,23 @@
 
     .hero-role {
       font-family: var(--heading-font);
-      font-size: 1rem;
+      font-size: 1.15rem;
       color: var(--accent-color);
-      letter-spacing: 0.05em;
-      font-weight: 500;
-      margin-bottom: 6px;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .hero-role a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      transition: color 0.2s ease;
+    }
+
+    .hero-role a:hover {
+      color: var(--accent-hover);
     }
 
     .hero-stack {
@@ -585,31 +654,33 @@
       background: var(--accent-hover);
     }
   </style>
+  <script>
+    // Apply saved theme before paint to avoid a flash of the wrong theme
+    (function () {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    })();
+  </script>
 </head>
 
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
+  <button class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle theme"></button>
 
   <main class="container" id="main-content">
 
     <!-- ─── Hero ─── -->
     <section class="hero" aria-label="Introduction">
       <img src="profile_pic.jpeg" alt="Alex Sin" class="profile-image" loading="eager" decoding="async">
-      <h1>Alex Sin</h1>
-      <p class="hero-role">SWE @ Cadmus &bull; CS @ AIT</p>
+      <h1>Alex Sin, M.Sc</h1>
+      <p class="hero-role">Software Engineer @ <a href="https://www.cadmus.io" target="_blank" rel="noopener noreferrer">Cadmus</a>, Australia</p>
       <p class="intro">
-        I build systems that power things people rely on, from real-time displays at 200+ Singapore bus stops
-        to assessment infrastructure used across universities in Australia, UK, US, and ME.
-        5 years of full-stack engineering across Elixir, Node.js, and React.
-        Currently pursuing a Masters in CS while engineering full-time at Cadmus.
+        I build real-time and large-scale systems, from displays at 200+ Singapore bus stops
+        to assessment infrastructure used by universities across Australia, the UK, US, and ME.
+        <span style="white-space: nowrap;">Full-stack</span> engineering since 2021, across Elixir, Node.js, and React.
       </p>
-      <nav class="contact-info" aria-label="Contact links">
-        <a href="https://github.com/alexsindev" target="_blank" rel="noopener noreferrer"
-          class="contact-link">github</a>
-        <a href="https://linkedin.com/in/alexsindev" target="_blank" rel="noopener noreferrer"
-          class="contact-link">linkedin</a>
-        <a href="mailto:alex.sin@cadmus.io" class="contact-link">alex.sin@cadmus.io</a>
-      </nav>
     </section>
 
     <!-- ─── Experience ─── -->
@@ -678,7 +749,7 @@
       <article class="experience-card">
         <time class="job-period" datetime="2025-08">Aug 2025 –<br>Present</time>
         <div class="job-content">
-          <h3 class="job-title">Asian Institute of Technology — MS Computer Science</h3>
+          <h3 class="job-title">Asian Institute of Technology — MSc Computer Science</h3>
           <a href="https://ait.ac.th/" target="_blank" rel="noopener noreferrer" class="company-link">
             ait.ac.th
           </a>
@@ -819,21 +890,6 @@
 
     </div>
 
-    <!-- ─── Now ─── -->
-    <h2 class="section-header">Now</h2>
-
-    <ul class="now-list">
-      <li>
-        Software Engineer at Cadmus — building full-stack features on a university assessment platform
-        used across Australia, UK, US, and ME.
-      </li>
-      <li>
-        MS Computer Science at Asian Institute of Technology — pursuing a Masters while engineering full-time.
-      </li>
-    </ul>
-    <p class="now-updated">Last updated: May 2026</p>
-
-
     <!-- ─── Contact ─── -->
     <h2 class="section-header" style="margin-top: 50px;">Contact</h2>
 
@@ -869,6 +925,38 @@
       el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
       observer.observe(el);
     });
+
+    // Theme toggle
+    (function () {
+      const root = document.documentElement;
+      const toggle = document.querySelector('.theme-toggle');
+      const sun = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>';
+      const moon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+      function effectiveTheme() {
+        return root.getAttribute('data-theme') || (prefersDark.matches ? 'dark' : 'light');
+      }
+
+      function render() {
+        // Show the icon for the theme you'd switch TO
+        toggle.innerHTML = effectiveTheme() === 'dark' ? sun : moon;
+      }
+
+      toggle.addEventListener('click', () => {
+        const next = effectiveTheme() === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        render();
+      });
+
+      // Keep icon in sync if OS theme changes and user hasn't chosen one
+      prefersDark.addEventListener('change', () => {
+        if (!root.getAttribute('data-theme')) render();
+      });
+
+      render();
+    })();
   </script>
 
 </body>
